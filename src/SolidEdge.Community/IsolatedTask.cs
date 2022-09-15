@@ -6,6 +6,7 @@ using System.Text;
 
 namespace SolidEdgeCommunity
 {
+    /*
     /// <summary>
     /// Generic class used to execute an IsolatedTaskProxy implementation.
     /// </summary>
@@ -25,7 +26,7 @@ namespace SolidEdgeCommunity
             _proxyType = typeof(T);
 
             // Create a custom AppDomain to do COM Interop.
-            _appDomain = AppDomain.CreateDomain(String.Format("{0} AppDomain", _proxyType.Name), null, AppDomain.CurrentDomain.SetupInformation);
+            _appDomain = AppDomain.CreateDomain(string.Format("{0} AppDomain", _proxyType.Name), null, AppDomain.CurrentDomain.SetupInformation);
 
             // Create a new instance of InteropProxy in the isolated application domain.
             _proxy = (T)_appDomain.CreateInstanceAndUnwrap(_proxyType.Assembly.FullName, _proxyType.FullName);
@@ -46,4 +47,5 @@ namespace SolidEdgeCommunity
 
         public T Proxy { get { return _proxy; } }
     }
+    */
 }

@@ -78,7 +78,7 @@ namespace SolidEdgeCommunity
             if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
             {
                 // Call CoRegisterMessageFilter().
-                Marshal.ThrowExceptionForHR(CoRegisterMessageFilter(newFilter: newFilter, oldFilter: out oldFilter));
+                System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(CoRegisterMessageFilter(newFilter: newFilter, oldFilter: out oldFilter));
             }
             else
             {

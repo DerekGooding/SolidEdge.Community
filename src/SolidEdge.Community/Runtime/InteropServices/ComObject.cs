@@ -22,7 +22,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
         /// <returns></returns>
         public static ITypeInfo GetITypeInfo(object comObject)
         {
-            if (Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+            if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
 
             var dispatch = comObject as IDispatch;
 
@@ -43,7 +43,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
         /// <returns></returns>
         public static T GetPropertyValue<T>(object comObject, string name)
         {
-            if (Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+            if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
 
             var type = comObject.GetType();
             var value = type.InvokeMember(name, System.Reflection.BindingFlags.GetProperty, null, comObject, null);
@@ -61,7 +61,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
         /// <returns></returns>
         public static T GetPropertyValue<T>(object comObject, string name, T defaultValue)
         {
-            if (Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+            if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
 
             var type = comObject.GetType();
 
@@ -83,7 +83,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
         /// <returns></returns>
         public static Type GetType(object comObject)
         {
-            if (Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+            if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
 
             Type type = null;
             var dispatch = comObject as IDispatch;
@@ -97,7 +97,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
                 {
                     typeInfo = dispatch.GetTypeInfo(0, LOCALE_SYSTEM_DEFAULT);
                     typeInfo.GetTypeAttr(out pTypeAttr);
-                    typeAttr = (System.Runtime.InteropServices.ComTypes.TYPEATTR)Marshal.PtrToStructure(pTypeAttr, typeof(System.Runtime.InteropServices.ComTypes.TYPEATTR));
+                    typeAttr = (System.Runtime.InteropServices.ComTypes.TYPEATTR)System.Runtime.InteropServices.Marshal.PtrToStructure(pTypeAttr, typeof(System.Runtime.InteropServices.ComTypes.TYPEATTR));
 
                     // Type can technically be defined in any loaded assembly.
                     var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -123,7 +123,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
                 if (typeInfo != null)
                 {
                     typeInfo.ReleaseTypeAttr(pTypeAttr);
-                    Marshal.ReleaseComObject(typeInfo);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(typeInfo);
                 }
             }
 

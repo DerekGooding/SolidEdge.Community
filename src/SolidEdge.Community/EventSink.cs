@@ -68,8 +68,9 @@ namespace SolidEdgeCommunity
                 // QueryInterface for IConnectionPointContainer.
                 container = (IConnectionPointContainer)source;
 
+                var item = typeof(T).GUID;
                 // Find the connection point by the GUID of type T.
-                container.FindConnectionPoint(typeof(T).GUID, out _connectionPoint);
+                container.FindConnectionPoint(ref item, out _connectionPoint);
 
                 if (_connectionPoint != null)
                 {
@@ -109,7 +110,7 @@ namespace SolidEdgeCommunity
                 {
                     try
                     {
-                        var count = Marshal.ReleaseComObject(_connectionPoint);
+                        var count = System.Runtime.InteropServices.Marshal.ReleaseComObject(_connectionPoint);
                     }
                     catch
                     {

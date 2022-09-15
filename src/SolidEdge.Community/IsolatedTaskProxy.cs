@@ -510,26 +510,26 @@ namespace SolidEdgeCommunity
         /// <returns></returns>
         protected TInterface UnwrapRuntimeCallableWrapper<TInterface>(object rcw) where TInterface : class
         {
-            if (RemotingServices.IsTransparentProxy(rcw))
+            /*if (RemotingServices.IsTransparentProxy(rcw))
             {
-                if (Marshal.IsComObject(rcw))
+                if (System.Runtime.InteropServices.Marshal.IsComObject(rcw))
                 {
-                    IntPtr punk = Marshal.GetIUnknownForObject(rcw);
+                    IntPtr punk = System.Runtime.InteropServices.Marshal.GetIUnknownForObject(rcw);
 
                     try
                     {
-                        return (TInterface)Marshal.GetObjectForIUnknown(punk);
+                        return (TInterface)System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(punk);
                     }
                     finally
                     {
-                        Marshal.Release(punk);
+                        System.Runtime.InteropServices.Marshal.Release(punk);
                     }
                 }
                 else
                 {
                     throw new InvalidComObjectException();
                 }
-            }
+            }*/
 
             return rcw as TInterface;
         }

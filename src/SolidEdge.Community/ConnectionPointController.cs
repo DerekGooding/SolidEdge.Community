@@ -45,7 +45,8 @@ namespace SolidEdgeCommunity
                 int cookie = 0;
 
                 cpc = (IConnectionPointContainer)container;
-                cpc.FindConnectionPoint(typeof(TInterface).GUID, out cp);
+                var item = typeof(TInterface).GUID;
+                cpc.FindConnectionPoint(ref item, out cp);
 
                 if (cp != null)
                 {
@@ -79,7 +80,8 @@ namespace SolidEdgeCommunity
                 int cookie = 0;
 
                 cpc = (IConnectionPointContainer)container;
-                cpc.FindConnectionPoint(typeof(TInterface).GUID, out cp);
+                var item = typeof(TInterface).GUID;
+                cpc.FindConnectionPoint(ref item, out cp);
 
                 if (cp != null)
                 {
@@ -119,7 +121,8 @@ namespace SolidEdgeCommunity
                 int cookie = 0;
 
                 cpc = (IConnectionPointContainer)container;
-                cpc.FindConnectionPoint(typeof(TInterface).GUID, out cp);
+                var item = typeof(TInterface).GUID;
+                cpc.FindConnectionPoint(ref item, out cp);
 
                 if (cp != null)
                 {

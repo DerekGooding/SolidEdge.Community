@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace SolidEdgeCommunity
@@ -44,7 +43,7 @@ namespace SolidEdgeCommunity
             try
             {
                 // Attempt to connect to a running instance of Solid Edge.
-                return (SolidEdgeFramework.Application)Marshal.GetActiveObject(progID: SolidEdgeSDK.PROGID.SolidEdge_Application);
+                return (SolidEdgeFramework.Application)Marshal.GetActiveObject(SolidEdgeSDK.PROGID.SolidEdge_Application);
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
@@ -89,7 +88,7 @@ namespace SolidEdgeCommunity
             try
             {
                 // Attempt to connect to a running instance of Solid Edge.
-                application = (SolidEdgeFramework.Application)Marshal.GetActiveObject(progID: SolidEdgeSDK.PROGID.SolidEdge_Application);
+                application = (SolidEdgeFramework.Application)Marshal.GetActiveObject(SolidEdgeSDK.PROGID.SolidEdge_Application);
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
@@ -156,7 +155,7 @@ namespace SolidEdgeCommunity
             {
                 if (installData != null)
                 {
-                    Marshal.ReleaseComObject(installData);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(installData);
                 }
             }
         }
@@ -180,7 +179,7 @@ namespace SolidEdgeCommunity
             {
                 if (installData != null)
                 {
-                    Marshal.ReleaseComObject(installData);
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(installData);
                 }
             }
         }
