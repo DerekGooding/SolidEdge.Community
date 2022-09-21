@@ -11,4 +11,10 @@
     <ProjectReference Include="..\SolidEdge.Community\SolidEdge.Community.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Interop.SolidEdge">
+      <HintPath>..\..\..\Interop.SolidEdge\src\Interop.SolidEdge\bin\Release\netstandard2.0\Interop.SolidEdge.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

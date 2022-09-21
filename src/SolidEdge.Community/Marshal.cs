@@ -6,8 +6,8 @@ namespace SolidEdgeCommunity
 {
     internal class Marshal
     {
-        public static object GetActiveObject(string progId) => GetActiveObject(progId, false);
-        public static object GetActiveObject(string progId, bool throwOnError = false)
+        public static object GetActiveObject(string progId) => GetActiveObject(progId, true);
+        public static object GetActiveObject(string progId, bool throwOnError = true)
         {
             if (progId == null)
                 throw new ArgumentNullException(nameof(progId));

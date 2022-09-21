@@ -27,9 +27,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Interop.SolidEdge" Version="219.0.0">
-      <PrivateAssets>None</PrivateAssets>
-    </PackageReference>
+    <Reference Include="Interop.SolidEdge">
+      <HintPath>..\..\..\Interop.SolidEdge\src\Interop.SolidEdge\bin\Release\netstandard2.0\Interop.SolidEdge.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
