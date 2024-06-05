@@ -15,6 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>interop solidedge community contrib</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|NET40|AnyCPU'">
     <DocumentationFile>bin\Release\net40\SolidEdge.Community.xml</DocumentationFile>

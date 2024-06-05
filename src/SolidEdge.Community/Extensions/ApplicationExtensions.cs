@@ -39,9 +39,8 @@ namespace SolidEdgeCommunity.Extensions
                 // ActiveDocument will throw an exception if no document is open.
                 return (SolidEdgeFramework.SolidEdgeDocument)application.ActiveDocument;
             }
-            catch
+            catch when (!throwOnError)
             {
-                if (throwOnError) throw;
             }
 
             return null;
@@ -68,9 +67,8 @@ namespace SolidEdgeCommunity.Extensions
                 // ActiveDocument will throw an exception if no document is open.
                 return (T)application.ActiveDocument;
             }
-            catch
+            catch when (!throwOnError)
             {
-                if (throwOnError) throw;
             }
 
             return null;
@@ -376,9 +374,9 @@ namespace SolidEdgeCommunity.Extensions
         /// <summary>
         /// Shows the form with the application main window as the owner.
         /// </summary>
-        public static void Show(this SolidEdgeFramework.Application application, System.Windows.Forms.Form form)
+        public static void Show(this SolidEdgeFramework.Application application, Form form)
         {
-            if (form == null) throw new ArgumentNullException("form");
+            ArgumentNullException.ThrowIfNull(form);
 
             form.Show(application.GetNativeWindow());
         }
@@ -386,20 +384,13 @@ namespace SolidEdgeCommunity.Extensions
         /// <summary>
         /// Shows the form as a modal dialog box with the application main window as the owner.
         /// </summary>
-        public static DialogResult ShowDialog(this SolidEdgeFramework.Application application, System.Windows.Forms.Form form)
-        {
-            if (form == null) throw new ArgumentNullException("form");
-
-            return form.ShowDialog(application.GetNativeWindow());
-        }
+        public static DialogResult ShowDialog(this SolidEdgeFramework.Application application, Form form)
+            => form == null ? throw new ArgumentNullException(nameof(form)) : form.ShowDialog(application.GetNativeWindow());
 
         /// <summary>
         /// Shows the form as a modal dialog box with the application main window as the owner.
         /// </summary>
         public static DialogResult ShowDialog(this SolidEdgeFramework.Application application, CommonDialog dialog)
-        {
-            if (dialog == null) throw new ArgumentNullException("dialog");
-            return dialog.ShowDialog(application.GetNativeWindow());
-        }
+            => dialog == null ? throw new ArgumentNullException(nameof(dialog)) : dialog.ShowDialog(application.GetNativeWindow());
     }
 }

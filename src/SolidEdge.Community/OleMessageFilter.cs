@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Threading;
 
 namespace SolidEdgeCommunity
@@ -18,10 +19,10 @@ namespace SolidEdgeCommunity
         PENDINGMSG_WAITDEFPROCESS = 2
     }
 
-    [ComImport]
+    [GeneratedComInterface]
     [Guid("00000016-0000-0000-C000-000000000046")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    internal interface IMessageFilter
+    internal partial interface IMessageFilter
     {
         [PreserveSig]
         int HandleInComingCall(int dwCallType, IntPtr hTaskCaller, int dwTickCount, IntPtr lpInterfaceInfo);
@@ -36,10 +37,11 @@ namespace SolidEdgeCommunity
     /// <summary>
     /// Class that implements the OLE IMessageFilter interface.
     /// </summary>
-    public class OleMessageFilter : IMessageFilter
+    [GeneratedComClass]
+    public sealed partial class OleMessageFilter : IMessageFilter
     {
-        [DllImport("Ole32.dll")]
-        private static extern int CoRegisterMessageFilter(IMessageFilter newFilter, out IMessageFilter oldFilter);
+        [LibraryImport("Ole32.dll")]
+        private static partial int CoRegisterMessageFilter(IMessageFilter newFilter, out IMessageFilter oldFilter);
 
         /// <summary>
         /// Private constructor.
@@ -71,18 +73,14 @@ namespace SolidEdgeCommunity
         /// </remarks>
         public static void Register()
         {
-            IMessageFilter newFilter = new OleMessageFilter();
-            IMessageFilter oldFilter = null;
-
             // 1st check the current thread's apartment state. It must be STA!
             if (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
             {
-                // Call CoRegisterMessageFilter().
-                System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(CoRegisterMessageFilter(newFilter: newFilter, oldFilter: out oldFilter));
+                System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(CoRegisterMessageFilter(newFilter: new OleMessageFilter(), oldFilter: out _));
             }
             else
             {
-                throw new System.Exception("The current thread's apartment state must be STA.");
+                throw new Exception("The current thread's apartment state must be STA.");
             }
         }
 
@@ -93,54 +91,35 @@ namespace SolidEdgeCommunity
         /// It is not necessary to call Unregister() unless you need to explicitly do so as it is handled
         /// in the destructor.
         /// </remarks>
-        public static void Unregister()
-        {
-            IMessageFilter oldFilter = null;
-
-            // Call CoRegisterMessageFilter().
-            CoRegisterMessageFilter(newFilter: null, oldFilter: out oldFilter);
-        }
+        public static void Unregister() => CoRegisterMessageFilter(newFilter: null, oldFilter: out _); // Call CoRegisterMessageFilter().
 
         #region IMessageFilter
 
-        public int HandleInComingCall(int dwCallType, IntPtr hTaskCaller, int dwTickCount, IntPtr lpInterfaceInfo)
-        {
-            return (int)SERVERCALL.SERVERCALL_ISHANDLED;
-        }
+        public int HandleInComingCall(int dwCallType, IntPtr hTaskCaller, int dwTickCount, IntPtr lpInterfaceInfo) => (int)SERVERCALL.SERVERCALL_ISHANDLED;
 
-        public int MessagePending(IntPtr hTaskCallee, int dwTickCount, int dwPendingType)
-        {
-            // Cancel the outgoing call. This should be returned only under extreme conditions. Canceling a call that
-            // has not replied or been rejected can create orphan transactions and lose resources. COM fails the original
-            // call and returns RPC_E_CALL_CANCELLED.
-            //return (int)NativeMethods.PENDINGMSG.PENDINGMSG_CANCELCALL;
+        // Cancel the outgoing call. This should be returned only under extreme conditions. Canceling a call that
+        // has not replied or been rejected can create orphan transactions and lose resources. COM fails the original
+        // call and returns RPC_E_CALL_CANCELLED.
+        //return (int)NativeMethods.PENDINGMSG.PENDINGMSG_CANCELCALL;
 
-            // Continue waiting for the reply, and do not dispatch the message unless it is a task-switching or
-            // window-activation message. A subsequent message will trigger another call to MessagePending.
-            //return (int)NativeMethods.PENDINGMSG.PENDINGMSG_WAITNOPROCESS;
+        // Continue waiting for the reply, and do not dispatch the message unless it is a task-switching or
+        // window-activation message. A subsequent message will trigger another call to MessagePending.
+        //return (int)NativeMethods.PENDINGMSG.PENDINGMSG_WAITNOPROCESS;
 
-            // Keyboard and mouse messages are no longer dispatched. However there are some cases where mouse and
-            // keyboard messages could cause the system to deadlock, and in these cases, mouse and keyboard messages
-            // are discarded. WM_PAINT messages are dispatched. Task-switching and activation messages are handled as before.
-            return (int)PENDINGMSG.PENDINGMSG_WAITDEFPROCESS;
-        }
+        // Keyboard and mouse messages are no longer dispatched. However there are some cases where mouse and
+        // keyboard messages could cause the system to deadlock, and in these cases, mouse and keyboard messages
+        // are discarded. WM_PAINT messages are dispatched. Task-switching and activation messages are handled as before.
+        public int MessagePending(IntPtr hTaskCallee, int dwTickCount, int dwPendingType) => (int)PENDINGMSG.PENDINGMSG_WAITDEFPROCESS;
 
+        // 0 ≤ value < 100
+        // The call is to be retried immediately.
+
+        // 100 ≤ value
+        // COM will wait for this many milliseconds and then retry the call.
+
+        // -1 | The call should be canceled. COM then returns RPC_E_CALL_REJECTED from the original method call.
         public int RetryRejectedCall(IntPtr hTaskCallee, int dwTickCount, int dwRejectType)
-        {
-            if (dwRejectType == (int)SERVERCALL.SERVERCALL_RETRYLATER)
-            {
-                // 0 ≤ value < 100
-                // The call is to be retried immediately.
-                return 99;
-
-                // 100 ≤ value
-                // COM will wait for this many milliseconds and then retry the call.
-                // return 1000; // Wait 1 second before retrying the call.
-            }
-
-            // The call should be canceled. COM then returns RPC_E_CALL_REJECTED from the original method call.
-            return -1;
-        }
+            => (dwRejectType == (int)SERVERCALL.SERVERCALL_RETRYLATER) ? 99 : -1;
 
         #endregion IMessageFilter
     }

@@ -15,7 +15,7 @@ namespace SolidEdgeCommunity
         //static extern void GetRunningObjectTable(int reserved, out IRunningObjectTable prot);
 
         //const int MK_E_UNAVAILABLE = (int)(0x800401E3 - 0x100000000);
-        private const int MK_E_UNAVAILABLE = unchecked((int)0x800401E3);
+        private const int _mk_E_UNAVAILABLE = unchecked((int)0x800401E3);
 
         /// <summary>
         /// Connects to a running instance of Solid Edge.
@@ -23,10 +23,7 @@ namespace SolidEdgeCommunity
         /// <returns>
         /// An object of type SolidEdgeFramework.Application.
         /// </returns>
-        public static SolidEdgeFramework.Application Connect()
-        {
-            return Connect(startIfNotRunning: false);
-        }
+        public static SolidEdgeFramework.Application Connect() => Connect(startIfNotRunning: false);
 
         /// <summary>
         /// Connects to or starts a new instance of Solid Edge.
@@ -47,7 +44,7 @@ namespace SolidEdgeCommunity
                 switch (ex.ErrorCode)
                 {
                     // Solid Edge is not running.
-                    case MK_E_UNAVAILABLE:
+                    case _mk_E_UNAVAILABLE:
                         if (startIfNotRunning)
                         {
                             // Start Solid Edge.
@@ -92,7 +89,7 @@ namespace SolidEdgeCommunity
                 switch (ex.ErrorCode)
                 {
                     // Solid Edge is not running.
-                    case MK_E_UNAVAILABLE:
+                    case _mk_E_UNAVAILABLE:
                         if (startIfNotRunning)
                         {
                             // Start Solid Edge.
@@ -109,13 +106,8 @@ namespace SolidEdgeCommunity
                         throw;
                 }
             }
-            catch
-            {
-                // Rethrow exception.
-                throw;
-            }
 
-            if ((application != null) && (ensureVisible))
+            if ((application != null) && ensureVisible)
             {
                 application.Visible = true;
             }
@@ -181,78 +173,13 @@ namespace SolidEdgeCommunity
             }
         }
 
-        //public static SolidEdgeFramework.Application[] GetRunningInstances()
-        //{
-        //    List<SolidEdgeFramework.Application> instances = new List<SolidEdgeFramework.Application>();
-        //    Type type = Type.GetTypeFromProgID(SolidEdge.PROGID.Application);
-        //    var clsid = type.GUID.ToString();
-
-        //    // get Running Object Table ...
-        //    IRunningObjectTable rot = null;
-        //    GetRunningObjectTable(0, out rot);
-
-        //    if (rot != null)
-        //    {
-        //        // get enumerator for ROT entries
-        //        IEnumMoniker monikerEnumerator = null;
-        //        rot.EnumRunning(out monikerEnumerator);
-
-        //        if (monikerEnumerator != null)
-        //        {
-        //            monikerEnumerator.Reset();
-
-        //            IntPtr pNumFetched = new IntPtr();
-        //            IMoniker[] monikers = new IMoniker[1];
-
-        //            while (monikerEnumerator.Next(1, monikers, pNumFetched) == 0)
-        //            {
-        //                IBindCtx bindCtx;
-        //                CreateBindCtx(0, out bindCtx);
-
-        //                if (bindCtx == null)
-        //                    continue;
-
-        //                string displayName;
-        //                monikers[0].GetDisplayName(bindCtx, null, out displayName);
-
-        //                Guid pClassID = Guid.Empty;
-        //                monikers[0].GetClassID(out pClassID);
-
-        //                if (displayName.IndexOf(clsid, StringComparison.OrdinalIgnoreCase) > 0)
-        //                {
-        //                    object comObject;
-        //                    rot.GetObject(monikers[0], out comObject);
-
-        //                    if (comObject != null)
-        //                    {
-        //                        var applicationInstance = comObject as SolidEdgeFramework.Application;
-        //                        if (applicationInstance != null)
-        //                        {
-        //                            instances.Add(applicationInstance);
-        //                        }
-        //                    }
-        //                }
-
-        //            }
-        //        }
-        //    }
-
-        //    return instances.ToArray();
-        //}
-
         /// <summary>
         /// Returns the path to the Solid Edge training folder.
         /// </summary>
         /// <remarks>
         /// Typically 'C:\Program Files\Solid Edge XXX\Training'.
         /// </remarks>
-        public static string GetTrainingFolderPath()
-        {
-            /* Get path to Solid Edge training directory. */
-            var trainingDirectory = new DirectoryInfo(Path.Combine(GetInstalledPath(), "Training"));
-
-            return trainingDirectory.FullName;
-        }
+        public static string GetTrainingFolderPath() => new DirectoryInfo(Path.Combine(GetInstalledPath(), "Training")).FullName;
 
         /// <summary>
         /// Returns a Version object representing the installed version of Solid Edge.

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Threading;
+using System;
 
 namespace SolidEdgeCommunity
 {
@@ -13,37 +14,35 @@ namespace SolidEdgeCommunity
         /// <summary>
         /// Lifetime services as disabled by default.
         /// </summary>
-        public override sealed object InitializeLifetimeService()
-        {
-            return null;
-        }
+        [Obsolete("Depreciated")]
+        public override sealed object InitializeLifetimeService() => null;
 
         /// <summary>
         /// Invokes a method in a STA thread.
         /// </summary>
         /// <param name="target"></param>
-        protected void InvokeSTAThread(Action target)
+        protected static void InvokeSTAThread(Action target)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            Thread thread = new(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     target();
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -51,10 +50,7 @@ namespace SolidEdgeCommunity
             // Wait for the thead to finish.
             thread.Join();
 
-            if (exception != null)
-            {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
-            }
+            throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
         }
 
         /// <summary>
@@ -63,28 +59,28 @@ namespace SolidEdgeCommunity
         /// <typeparam name="TArg1">The type of arg1.</typeparam>
         /// <param name="target"></param>
         /// <param name="arg1"></param>
-        protected void InvokeSTAThread<TArg1>(Action<TArg1> target, TArg1 arg1)
+        protected static void InvokeSTAThread<TArg1>(Action<TArg1> target, TArg1 arg1)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     target(arg1);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -94,7 +90,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
         }
 
@@ -106,28 +102,28 @@ namespace SolidEdgeCommunity
         /// <param name="target"></param>
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
-        protected void InvokeSTAThread<TArg1, TArg2>(Action<TArg1, TArg2> target, TArg1 arg1, TArg2 arg2)
+        protected static void InvokeSTAThread<TArg1, TArg2>(Action<TArg1, TArg2> target, TArg1 arg1, TArg2 arg2)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     target(arg1, arg2);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -137,7 +133,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
         }
 
@@ -151,28 +147,28 @@ namespace SolidEdgeCommunity
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <param name="arg3"></param>
-        protected void InvokeSTAThread<TArg1, TArg2, TArg3>(Action<TArg1, TArg2, TArg3> target, TArg1 arg1, TArg2 arg2, TArg3 arg3)
+        protected static void InvokeSTAThread<TArg1, TArg2, TArg3>(Action<TArg1, TArg2, TArg3> target, TArg1 arg1, TArg2 arg2, TArg3 arg3)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     target(arg1, arg2, arg3);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -182,7 +178,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
         }
 
@@ -198,28 +194,28 @@ namespace SolidEdgeCommunity
         /// <param name="arg2"></param>
         /// <param name="arg3"></param>
         /// <param name="arg4"></param>
-        protected void InvokeSTAThread<TArg1, TArg2, TArg3, TArg4>(Action<TArg1, TArg2, TArg3, TArg4> target, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4)
+        protected static void InvokeSTAThread<TArg1, TArg2, TArg3, TArg4>(Action<TArg1, TArg2, TArg3, TArg4> target, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     target(arg1, arg2, arg3, arg4);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -229,7 +225,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
         }
 
@@ -239,29 +235,29 @@ namespace SolidEdgeCommunity
         /// <typeparam name="TResult">The type of the return value.</typeparam>
         /// <param name="target"></param>
         /// <returns>An instance of TResult.</returns>
-        protected TResult InvokeSTAThread<TResult>(Func<TResult> target)
+        protected static TResult InvokeSTAThread<TResult>(Func<TResult> target)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
-            TResult returnValue = default(TResult);
+            TResult returnValue = default;
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     returnValue = target();
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -271,7 +267,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
 
             return returnValue;
@@ -285,29 +281,29 @@ namespace SolidEdgeCommunity
         /// <param name="target"></param>
         /// <param name="arg1"></param>
         /// <returns>An instance of TResult.</returns>
-        protected TResult InvokeSTAThread<TArg1, TResult>(Func<TArg1, TResult> target, TArg1 arg1)
+        protected static TResult InvokeSTAThread<TArg1, TResult>(Func<TArg1, TResult> target, TArg1 arg1)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
-            TResult returnValue = default(TResult);
+            TResult returnValue = default;
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     returnValue = target(arg1);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -317,7 +313,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
 
             return returnValue;
@@ -333,29 +329,29 @@ namespace SolidEdgeCommunity
         /// <param name="arg1"></param>
         /// <param name="arg2"></param>
         /// <returns>An instance of TResult.</returns>
-        protected TResult InvokeSTAThread<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> target, TArg1 arg1, TArg2 arg2)
+        protected static TResult InvokeSTAThread<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> target, TArg1 arg1, TArg2 arg2)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
-            TResult returnValue = default(TResult);
+            TResult returnValue = default;
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     returnValue = target(arg1, arg2);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -365,7 +361,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
 
             return returnValue;
@@ -383,29 +379,29 @@ namespace SolidEdgeCommunity
         /// <param name="arg2"></param>
         /// <param name="arg3"></param>
         /// <returns>An instance of TResult.</returns>
-        protected TResult InvokeSTAThread<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> target, TArg1 arg1, TArg2 arg2, TArg3 arg3)
+        protected static TResult InvokeSTAThread<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> target, TArg1 arg1, TArg2 arg2, TArg3 arg3)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
-            TResult returnValue = default(TResult);
+            TResult returnValue = default;
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
                 {
                     returnValue = target(arg1, arg2, arg3);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     exception = ex;
                 }
             });
 
             // Important! Set thread apartment state to STA.
-            thread.SetApartmentState(System.Threading.ApartmentState.STA);
+            thread.SetApartmentState(ApartmentState.STA);
 
             // Start the thread.
             thread.Start();
@@ -415,7 +411,7 @@ namespace SolidEdgeCommunity
 
             if (exception != null)
             {
-                throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
+                throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
             }
 
             return returnValue;
@@ -435,15 +431,15 @@ namespace SolidEdgeCommunity
         /// <param name="arg3"></param>
         /// <param name="arg4"></param>
         /// <returns>An instance of TResult.</returns>
-        protected TResult InvokeSTAThread<TArg1, TArg2, TArg3, TArg4, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> target, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4)
+        protected static TResult InvokeSTAThread<TArg1, TArg2, TArg3, TArg4, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> target, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4)
         {
-            if (target == null) throw new ArgumentNullException("target");
+            ArgumentNullException.ThrowIfNull(target);
 
-            TResult returnValue = default(TResult);
+            TResult returnValue = default;
             Exception exception = null;
 
             // Define thread.
-            var thread = new System.Threading.Thread(() =>
+            var thread = new Thread(() =>
             {
                 // Thread specific try\catch.
                 try
@@ -503,30 +499,6 @@ namespace SolidEdgeCommunity
         /// <typeparam name="TInterface"></typeparam>
         /// <param name="rcw"></param>
         /// <returns></returns>
-        protected TInterface UnwrapRuntimeCallableWrapper<TInterface>(object rcw) where TInterface : class
-        {
-            /*if (RemotingServices.IsTransparentProxy(rcw))
-            {
-                if (System.Runtime.InteropServices.Marshal.IsComObject(rcw))
-                {
-                    IntPtr punk = System.Runtime.InteropServices.Marshal.GetIUnknownForObject(rcw);
-
-                    try
-                    {
-                        return (TInterface)System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(punk);
-                    }
-                    finally
-                    {
-                        System.Runtime.InteropServices.Marshal.Release(punk);
-                    }
-                }
-                else
-                {
-                    throw new InvalidComObjectException();
-                }
-            }*/
-
-            return rcw as TInterface;
-        }
+        protected static TInterface UnwrapRuntimeCallableWrapper<TInterface>(object rcw) where TInterface : class => rcw as TInterface;
     }
 }

@@ -43,31 +43,24 @@ namespace SolidEdgeCommunity.Extensions
         /// </summary>
         internal static SolidEdgeFileProperties.Property InternalUpdateCustomProperty(this SolidEdgeFileProperties.PropertySets propertySets, string propertyName, object propertyValue)
         {
-            SolidEdgeFileProperties.Properties customPropertySet = null;
-            SolidEdgeFileProperties.Property property = null;
+            // Get a reference to the custom property set.
+            SolidEdgeFileProperties.Properties customPropertySet = (SolidEdgeFileProperties.Properties)propertySets["Custom"];
 
             try
             {
-                // Get a reference to the custom property set.
-                customPropertySet = (SolidEdgeFileProperties.Properties)propertySets["Custom"];
-
                 // Attempt to get the custom property.
-                property = (SolidEdgeFileProperties.Property)customPropertySet[propertyName];
+                SolidEdgeFileProperties.Property property = (SolidEdgeFileProperties.Property)customPropertySet[propertyName];
 
                 // If we get here, the custom property exists so update the value.
-                property.Value = propertyValue;
+                ((SolidEdgeFileProperties.Property)null).Value = propertyValue;
             }
             catch (System.Runtime.InteropServices.COMException)
             {
                 // If we get here, the custom property does not exist so add it.
-                property = (SolidEdgeFileProperties.Property)customPropertySet.Add(propertyName, propertyValue);
-            }
-            catch
-            {
-                throw;
+                customPropertySet.Add(propertyName, propertyValue);
             }
 
-            return property;
+            return null;
         }
 
         /// <summary>

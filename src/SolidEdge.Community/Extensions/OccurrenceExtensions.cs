@@ -1,78 +1,73 @@
 ﻿using System;
 using System.Linq;
 
-namespace SolidEdgeCommunity.Extensions
+namespace SolidEdgeCommunity.Extensions;
+
+/// <summary>
+/// SolidEdgePart.WeldmentDocument extension methods.
+/// </summary>
+public static class OccurrenceExtensions
 {
     /// <summary>
-    /// SolidEdgePart.WeldmentDocument extension methods.
+    /// Returns the version of Solid Edge that was used to create the referenced document.
     /// </summary>
-    public static class OccurrenceExtensions
+    /// <param name="occurrence"></param>
+    public static SolidEdgeFramework.SolidEdgeDocument GetOccurrenceDocument(this SolidEdgeAssembly.Occurrence occurrence)
+        => occurrence as SolidEdgeFramework.SolidEdgeDocument;
+
+    /// <summary>
+    /// Returns a strongly typed occurrence document.
+    /// </summary>
+    /// <typeparam name="T">The type to return.</typeparam>
+    public static T GetOccurrenceDocument<T>(this SolidEdgeAssembly.Occurrence occurrence) where T : class
     {
-        /// <summary>
-        /// Returns the version of Solid Edge that was used to create the referenced document.
-        /// </summary>
-        /// <param name="document"></param>
-        /// <returns></returns>
-        public static SolidEdgeFramework.SolidEdgeDocument GetOccurrenceDocument(this SolidEdgeAssembly.Occurrence occurrence)
+        return occurrence.GetOccurrenceDocument<T>(true);
+    }
+
+    /// <summary>
+    /// Returns a strongly typed occurrence document.
+    /// </summary>
+    /// <typeparam name="T">The type to return.</typeparam>
+    public static T GetOccurrenceDocument<T>(this SolidEdgeAssembly.Occurrence occurrence, bool throwOnError) where T : class
+    {
+        try
         {
-            return occurrence as SolidEdgeFramework.SolidEdgeDocument;
+            return (T)occurrence.OccurrenceDocument;
+        }
+        catch when (!throwOnError)
+        {
         }
 
-        /// <summary>
-        /// Returns a strongly typed occurrence document.
-        /// </summary>
-        /// <typeparam name="T">The type to return.</typeparam>
-        public static T GetOccurrenceDocument<T>(this SolidEdgeAssembly.Occurrence occurrence) where T : class
-        {
-            return occurrence.GetOccurrenceDocument<T>(true);
-        }
+        return null;
+    }
 
-        /// <summary>
-        /// Returns a strongly typed occurrence document.
-        /// </summary>
-        /// <typeparam name="T">The type to return.</typeparam>
-        public static T GetOccurrenceDocument<T>(this SolidEdgeAssembly.Occurrence occurrence, bool throwOnError) where T : class
-        {
-            try
-            {
-                return (T)occurrence.OccurrenceDocument;
-            }
-            catch
-            {
-                if (throwOnError) throw;
-            }
+    /// <summary>
+    /// Converts Array from GetBodyInversionMatrix() to double[].
+    /// </summary>
+    public static double[] GetBodyInversionMatrix(this SolidEdgeAssembly.Occurrence occurrence)
+    {
+        Array matrix = Array.CreateInstance(typeof(double), 0);
+        occurrence.GetBodyInversionMatrix(ref matrix);
+        return matrix.OfType<double>().ToArray();
+    }
 
-            return null;
-        }
+    /// <summary>
+    /// Converts Array from GetExplodeMatrix() to double[].
+    /// </summary>
+    public static double[] GetExplodeMatrix(this SolidEdgeAssembly.Occurrence occurrence)
+    {
+        Array matrix = Array.CreateInstance(typeof(double), 0);
+        occurrence.GetExplodeMatrix(ref matrix);
+        return matrix.OfType<double>().ToArray();
+    }
 
-        /// <summary>
-        /// Converts Array from GetBodyInversionMatrix() to double[].
-        /// </summary>
-        public static double[] GetBodyInversionMatrix(this SolidEdgeAssembly.Occurrence occurrence)
-        {
-            Array matrix = Array.CreateInstance(typeof(double), 0);
-            occurrence.GetBodyInversionMatrix(ref matrix);
-            return matrix.OfType<double>().ToArray();
-        }
-
-        /// <summary>
-        /// Converts Array from GetExplodeMatrix() to double[].
-        /// </summary>
-        public static double[] GetExplodeMatrix(this SolidEdgeAssembly.Occurrence occurrence)
-        {
-            Array matrix = Array.CreateInstance(typeof(double), 0);
-            occurrence.GetExplodeMatrix(ref matrix);
-            return matrix.OfType<double>().ToArray();
-        }
-
-        /// <summary>
-        /// Converts Array from GetMatrix() to double[].
-        /// </summary>
-        public static double[] GetMatrix(this SolidEdgeAssembly.Occurrence occurrence)
-        {
-            Array matrix = Array.CreateInstance(typeof(double), 0);
-            occurrence.GetMatrix(ref matrix);
-            return matrix.OfType<double>().ToArray();
-        }
+    /// <summary>
+    /// Converts Array from GetMatrix() to double[].
+    /// </summary>
+    public static double[] GetMatrix(this SolidEdgeAssembly.Occurrence occurrence)
+    {
+        Array matrix = Array.CreateInstance(typeof(double), 0);
+        occurrence.GetMatrix(ref matrix);
+        return matrix.OfType<double>().ToArray();
     }
 }

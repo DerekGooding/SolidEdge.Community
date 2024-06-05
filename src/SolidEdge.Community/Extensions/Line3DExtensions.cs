@@ -17,9 +17,8 @@ namespace SolidEdgeCommunity.Extensions
                 // GetKeypointPosition may throw an exception so wrap in try\catch.
                 line3d.GetKeypointPosition(KeypointType, ref position);
             }
-            catch
+            catch when (!throwOnError)
             {
-                if (throwOnError) throw;
             }
 
             return position.OfType<double>().ToArray();
