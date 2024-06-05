@@ -4,14 +4,14 @@ using System.Threading;
 
 namespace SolidEdgeCommunity
 {
-    enum SERVERCALL
+    internal enum SERVERCALL
     {
         SERVERCALL_ISHANDLED = 0,
         SERVERCALL_REJECTED = 1,
         SERVERCALL_RETRYLATER = 2
     }
 
-    enum PENDINGMSG
+    internal enum PENDINGMSG
     {
         PENDINGMSG_CANCELCALL = 0,
         PENDINGMSG_WAITNOPROCESS = 1,
@@ -21,14 +21,14 @@ namespace SolidEdgeCommunity
     [ComImport]
     [Guid("00000016-0000-0000-C000-000000000046")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-    interface IMessageFilter
+    internal interface IMessageFilter
     {
         [PreserveSig]
         int HandleInComingCall(int dwCallType, IntPtr hTaskCaller, int dwTickCount, IntPtr lpInterfaceInfo);
 
         [PreserveSig]
         int MessagePending(IntPtr hTaskCallee, int dwTickCount, int dwPendingType);
-        
+
         [PreserveSig]
         int RetryRejectedCall(IntPtr hTaskCallee, int dwTickCount, int dwRejectType);
     }
@@ -39,7 +39,7 @@ namespace SolidEdgeCommunity
     public class OleMessageFilter : IMessageFilter
     {
         [DllImport("Ole32.dll")]
-        static extern int CoRegisterMessageFilter(IMessageFilter newFilter, out IMessageFilter oldFilter);
+        private static extern int CoRegisterMessageFilter(IMessageFilter newFilter, out IMessageFilter oldFilter);
 
         /// <summary>
         /// Private constructor.
@@ -61,7 +61,7 @@ namespace SolidEdgeCommunity
         }
 
         /// <summary>
-        /// Registers this instance of IMessageFilter with OLE to handle concurrency issues on the current thread. 
+        /// Registers this instance of IMessageFilter with OLE to handle concurrency issues on the current thread.
         /// </summary>
         /// <remarks>
         /// Only one message filter can be registered for each thread.
@@ -87,7 +87,7 @@ namespace SolidEdgeCommunity
         }
 
         /// <summary>
-        /// Unregisters a previous instance of IMessageFilter with OLE on the current thread. 
+        /// Unregisters a previous instance of IMessageFilter with OLE on the current thread.
         /// </summary>
         /// <remarks>
         /// It is not necessary to call Unregister() unless you need to explicitly do so as it is handled
@@ -142,6 +142,6 @@ namespace SolidEdgeCommunity
             return -1;
         }
 
-        #endregion
+        #endregion IMessageFilter
     }
 }

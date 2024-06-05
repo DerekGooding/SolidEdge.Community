@@ -1,10 +1,8 @@
 ﻿using SolidEdgeCommunity.Runtime.InteropServices.ComTypes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 
 namespace SolidEdgeCommunity.Runtime.InteropServices
 {
@@ -13,7 +11,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
     /// </summary>
     public class ComObject
     {
-        const int LOCALE_SYSTEM_DEFAULT = 2048;
+        private const int LOCALE_SYSTEM_DEFAULT = 2048;
 
         /// <summary>
         /// Using IDispatch, returns the ITypeInfo of the specified object.

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-namespace SolidEdgeCommunity
+﻿namespace SolidEdgeCommunity
 {
     /*
     /// <summary>
@@ -18,7 +12,7 @@ namespace SolidEdgeCommunity
         private T _proxy = null;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public IsolatedTask()
         {

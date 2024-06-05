@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA", "QA\QA.csproj", "{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QA", "QA\QA.csproj", "{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidEdge.Community", "SolidEdge.Community\SolidEdge.Community.csproj", "{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}"
 EndProject

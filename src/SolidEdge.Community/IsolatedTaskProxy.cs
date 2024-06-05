@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting;
-using System.Text;
 
 namespace SolidEdgeCommunity
 {
@@ -18,7 +13,7 @@ namespace SolidEdgeCommunity
         /// <summary>
         /// Lifetime services as disabled by default.
         /// </summary>
-        public sealed override object InitializeLifetimeService()
+        public override sealed object InitializeLifetimeService()
         {
             return null;
         }

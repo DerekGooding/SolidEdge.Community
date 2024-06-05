@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace SolidEdgeCommunity
 {
@@ -18,7 +15,7 @@ namespace SolidEdgeCommunity
         //static extern void GetRunningObjectTable(int reserved, out IRunningObjectTable prot);
 
         //const int MK_E_UNAVAILABLE = (int)(0x800401E3 - 0x100000000);
-        const int MK_E_UNAVAILABLE = unchecked((int)0x800401E3);
+        private const int MK_E_UNAVAILABLE = unchecked((int)0x800401E3);
 
         /// <summary>
         /// Connects to a running instance of Solid Edge.

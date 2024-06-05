@@ -1,20 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\SolidEdge.Community\SolidEdge.Community.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Interop.SolidEdge">
-      <HintPath>..\..\..\Interop.SolidEdge\src\Interop.SolidEdge\bin\Release\netstandard2.0\Interop.SolidEdge.dll</HintPath>
+      <HintPath>..\..\..\Interop.SolidEdge\src\Interop.SolidEdge\bin\Release\net8.0\Interop.SolidEdge.dll</HintPath>
     </Reference>
   </ItemGroup>
-
 </Project>

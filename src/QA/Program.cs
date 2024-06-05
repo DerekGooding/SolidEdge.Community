@@ -1,14 +1,12 @@
 ﻿using SolidEdgeCommunity;
-using System;
 
-namespace QA
+namespace QA;
+
+internal static class Program
 {
-    class Program
+    private static void Main()
     {
-        static void Main(string[] args)
-        {
-            var application = SolidEdgeUtils.Connect(true);
-            application.Visible = true;
-        }
+        var application = SolidEdgeUtils.Connect(true);
+        application.Visible = true;
     }
 }

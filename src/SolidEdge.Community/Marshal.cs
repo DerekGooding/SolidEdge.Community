@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-
 namespace SolidEdgeCommunity
 {
     internal class Marshal
     {
         public static object GetActiveObject(string progId) => GetActiveObject(progId, true);
+
         public static object GetActiveObject(string progId, bool throwOnError = true)
         {
             if (progId == null)
@@ -31,6 +31,7 @@ namespace SolidEdgeCommunity
             }
             return obj;
         }
+
         [DllImport("ole32")]
         private static extern int CLSIDFromProgIDEx([MarshalAs(UnmanagedType.LPWStr)] string lpszProgID, out Guid lpclsid);
 

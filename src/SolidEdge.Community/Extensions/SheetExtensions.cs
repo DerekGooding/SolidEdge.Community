@@ -1,36 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace SolidEdgeCommunity.Extensions
 {
     public static class SheetExtensions
     {
         [DllImport("user32.dll")]
-        static extern bool CloseClipboard();
+        private static extern bool CloseClipboard();
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
-        static extern IntPtr GetClipboardData(uint format);
+        private static extern IntPtr GetClipboardData(uint format);
 
         [DllImport("user32.dll")]
-        static extern IntPtr GetClipboardOwner();
+        private static extern IntPtr GetClipboardOwner();
 
         [DllImport("user32.dll")]
-        static extern bool IsClipboardFormatAvailable(uint format);
+        private static extern bool IsClipboardFormatAvailable(uint format);
 
         [DllImport("user32.dll")]
-        static extern bool OpenClipboard(IntPtr hWndNewOwner);
+        private static extern bool OpenClipboard(IntPtr hWndNewOwner);
 
         [DllImport("gdi32.dll")]
-        static extern bool DeleteEnhMetaFile(IntPtr hemf);
+        private static extern bool DeleteEnhMetaFile(IntPtr hemf);
 
         [DllImport("gdi32.dll")]
-        static extern uint GetEnhMetaFileBits(IntPtr hemf, uint cbBuffer, [Out] byte[] lpbBuffer);
+        private static extern uint GetEnhMetaFileBits(IntPtr hemf, uint cbBuffer, [Out] byte[] lpbBuffer);
 
-        const uint CF_ENHMETAFILE = 14;
+        private const uint CF_ENHMETAFILE = 14;
 
         public static System.Drawing.Imaging.Metafile GetEnhancedMetafile(this SolidEdgeDraft.Sheet sheet)
         {
