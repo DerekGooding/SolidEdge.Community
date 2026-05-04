@@ -1,1 +1,6 @@
-This is a forked repository that has updated the library for .net 8. You'll need to set your project to windows-only. 
+I've been maintaining this repository for some years now. Up to .Net10 currently. 
+
+Use "-windows" in your target frameworks to use this project. 
+
+
+Derek Gooding
