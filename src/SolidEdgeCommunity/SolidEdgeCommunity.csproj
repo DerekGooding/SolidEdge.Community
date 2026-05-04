@@ -22,7 +22,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.SolidEdge">
-      <HintPath>..\..\..\..\..\..\..\REPOS\HammondTools\Interop.SolidEdge.dll</HintPath>
+      <HintPath>..\..\lib\Interop.SolidEdge.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
