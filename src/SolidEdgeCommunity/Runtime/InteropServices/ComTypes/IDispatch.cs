@@ -7,7 +7,7 @@ namespace SolidEdgeCommunity.Runtime.InteropServices.ComTypes;
 [ComImport]
 [Guid("00020400-0000-0000-C000-000000000046")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-internal interface IDispatch
+internal partial interface IDispatch
 {
     int GetTypeInfoCount();
 

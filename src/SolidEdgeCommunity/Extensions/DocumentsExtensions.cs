@@ -126,7 +126,7 @@ public static class DocumentsExtensions
     /// </summary>
     public static TDocumentType OpenInBackground<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename)
     {
-        ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
+        const ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
         return (TDocumentType)documents.Open(Filename, JDOCUMENTPROP_NOWINDOW);
     }
 
@@ -141,7 +141,7 @@ public static class DocumentsExtensions
         object RevisionRuleOption,
         object StopFileOpenIfRevisionRuleNotApplicable)
     {
-        ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
+        const ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
         return (TDocumentType)documents.Open(Filename,
                                              JDOCUMENTPROP_NOWINDOW,
                                              AltPath,

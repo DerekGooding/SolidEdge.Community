@@ -10,14 +10,16 @@ public static class MouseExtensions
     /// </summary>
     /// <param name="mouse"></param>
     /// <param name="filter"></param>
-    public static void AddToLocateFilter(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateFilterConstants filter) => mouse.AddToLocateFilter((int)filter);
+    public static void AddToLocateFilter(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateFilterConstants filter)
+        => mouse.AddToLocateFilter((int)filter);
 
     /// <summary>
     /// Sets the locate mode for the referenced object.
     /// </summary>
     /// <param name="mouse"></param>
     /// <param name="mode"></param>
-    public static void SetLocateMode(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateModes mode) => mouse.LocateMode = (int)mode;
+    public static void SetLocateMode(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateModes mode)
+        => mouse.LocateMode = (int)mode;
 
     /// <summary>
     /// Returns the locate mode for the referenced object.
@@ -25,5 +27,6 @@ public static class MouseExtensions
     /// <param name="mouse"></param>
     /// <param name="mode"></param>
     /// <returns></returns>
-    public static SolidEdgeConstants.seLocateModes GetLocateMode(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateModes mode) => (SolidEdgeConstants.seLocateModes)mouse.LocateMode;
+    public static SolidEdgeConstants.seLocateModes GetLocateMode(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateModes mode)
+        => (SolidEdgeConstants.seLocateModes)mouse.LocateMode;
 }
