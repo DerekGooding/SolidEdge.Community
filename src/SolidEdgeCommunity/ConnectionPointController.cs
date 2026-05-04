@@ -80,8 +80,7 @@ public class ConnectionPointController
             var item = typeof(TInterface).GUID;
             cpc.FindConnectionPoint(ref item, out IConnectionPoint cp);
 
-            cookie = _connectionPointDictionary[cp];
-            return true;
+            return (cp != null) && _connectionPointDictionary.ContainsKey(cp);
         }
         finally
         {
@@ -106,15 +105,16 @@ public class ConnectionPointController
             Monitor.Enter(this, ref lockTaken);
 
             IConnectionPointContainer cpc = null;
-            int cookie = 0;
 
             cpc = (IConnectionPointContainer)container;
             var item = typeof(TInterface).GUID;
             cpc.FindConnectionPoint(ref item, out IConnectionPoint cp);
 
-            cookie = _connectionPointDictionary[cp];
-            cp.Unadvise(cookie);
-            _connectionPointDictionary.Remove(cp);
+            if (cp != null && _connectionPointDictionary.TryGetValue(cp, out int cookie))
+            {
+                cp.Unadvise(cookie);
+                _connectionPointDictionary.Remove(cp);
+            }
         }
         finally
         {

@@ -87,11 +87,16 @@ public static class DraftDocumentExtensions
     /// <returns></returns>
     public static IEnumerable<SolidEdgeDraft.DrawingView> EnumerateDrawingViews(this SolidEdgeDraft.DraftDocument document)
     {
-        foreach (SolidEdgeDraft.Sheet sheet in document.Sheets)
+        var sheets = document.Sheets;
+
+        for (int i = 1; i <= sheets.Count; i++)
         {
-            foreach (SolidEdgeDraft.DrawingView drawingView in sheet.DrawingViews)
+            var sheet = sheets.Item(i);
+            var drawingViews = sheet.DrawingViews;
+
+            for (int j = 1; j <= drawingViews.Count; j++)
             {
-                yield return drawingView;
+                yield return drawingViews.Item(j);
             }
         }
     }

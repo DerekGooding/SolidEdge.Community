@@ -1,0 +1,33 @@
+using Moq;
+using SolidEdgeCommunity;
+using System.Runtime.InteropServices.ComTypes;
+
+namespace SolidEdgeCommunity.Tests;
+
+[TestClass]
+public class ConnectionPointControllerTests
+{
+    [TestMethod]
+    public void AdviseSink_ShouldAdvise_WhenNotAdvised()
+    {
+        // Arrange
+        var sink = new object();
+        var controller = new ConnectionPointController(sink);
+        var mockContainer = new Mock<IConnectionPointContainer>();
+        var mockCP = new Mock<IConnectionPoint>();
+        int cookie = 123;
+
+        mockContainer.Setup(c => c.FindConnectionPoint(ref It.Ref<Guid>.IsAny, out It.Ref<IConnectionPoint>.IsAny))
+            .Callback(new FindCPCallback((ref Guid g, out IConnectionPoint cp) => cp = mockCP.Object));
+        
+        mockCP.Setup(cp => cp.Advise(sink, out cookie));
+
+        // Act
+        controller.AdviseSink<IConnectionPoint>(mockContainer.Object);
+
+        // Assert
+        mockCP.Verify(cp => cp.Advise(sink, out It.Ref<int>.IsAny), Times.Once);
+    }
+
+    delegate void FindCPCallback(ref Guid guid, out IConnectionPoint cp);
+}

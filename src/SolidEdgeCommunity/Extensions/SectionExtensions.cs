@@ -55,11 +55,16 @@ public static class SectionExtensions
     /// <returns></returns>
     public static IEnumerable<SolidEdgeDraft.DrawingView> EnumerateDrawingViews(this SolidEdgeDraft.Section section)
     {
-        foreach (SolidEdgeDraft.Sheet sheet in section.Sheets)
+        var sheets = section.Sheets;
+
+        for (int i = 1; i <= sheets.Count; i++)
         {
-            foreach (SolidEdgeDraft.DrawingView drawingView in sheet.DrawingViews)
+            var sheet = sheets.Item(i);
+            var drawingViews = sheet.DrawingViews;
+
+            for (int j = 1; j <= drawingViews.Count; j++)
             {
-                yield return drawingView;
+                yield return drawingViews.Item(j);
             }
         }
     }
