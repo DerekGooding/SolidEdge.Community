@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.5.11723.231 stable
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidEdge.Community", "SolidEdge.Community\SolidEdge.Community.csproj", "{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidEdgeCommunity", "SolidEdgeCommunity\SolidEdgeCommunity.csproj", "{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
