@@ -1,8 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.5.11723.231 stable
+VisualStudioVersion = 18.5.11723.231
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidEdgeCommunity", "SolidEdgeCommunity\SolidEdgeCommunity.csproj", "{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolidEdgeCommunity.Tests", "SolidEdgeCommunity.Tests\SolidEdgeCommunity.Tests.csproj", "{C52EAA68-1942-4836-B657-F51FC707678A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,6 +16,10 @@ Global
 		{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C52EAA68-1942-4836-B657-F51FC707678A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C52EAA68-1942-4836-B657-F51FC707678A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C52EAA68-1942-4836-B657-F51FC707678A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C52EAA68-1942-4836-B657-F51FC707678A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
