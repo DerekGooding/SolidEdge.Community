@@ -19,10 +19,7 @@ public static class OccurrenceExtensions
     /// Returns a strongly typed occurrence document.
     /// </summary>
     /// <typeparam name="T">The type to return.</typeparam>
-    public static T GetOccurrenceDocument<T>(this SolidEdgeAssembly.Occurrence occurrence) where T : class
-    {
-        return occurrence.GetOccurrenceDocument<T>(true);
-    }
+    public static T GetOccurrenceDocument<T>(this SolidEdgeAssembly.Occurrence occurrence) where T : class => occurrence.GetOccurrenceDocument<T>(true);
 
     /// <summary>
     /// Returns a strongly typed occurrence document.
