@@ -1,6 +1,5 @@
 using Moq;
 using SolidEdgeCommunity.Extensions;
-using SolidEdgeFramework;
 using System.Collections;
 
 namespace SolidEdgeCommunity.Tests;
@@ -21,7 +20,7 @@ public class SectionExtensionsTests
         mockSection.Setup(s => s.Sheets).Returns(mockSheets.Object);
         mockSheets.SetupGet(s => s.Count).Returns(1);
         mockSheets.Setup(s => s.Item(1)).Returns(mockSheet.Object);
-        
+
         mockSheet.Setup(s => s.DrawingViews).Returns(mockViews.Object);
         mockViews.SetupGet(v => v.Count).Returns(1);
         mockViews.Setup(v => v.Item(1)).Returns(mockView.Object);
@@ -42,19 +41,22 @@ public class SectionExtensionsTests
         var mockSheets = new Mock<SolidEdgeDraft.SectionSheets>();
         var mockSheet1 = new Mock<SolidEdgeDraft.Sheet>();
         var mockSheet2 = new Mock<SolidEdgeDraft.Sheet>();
-        
+
         mockSection.Setup(s => s.Sheets).Returns(mockSheets.Object);
         mockSheets.As<IEnumerable>().Setup(s => s.GetEnumerator()).Returns(new[] { mockSheet1.Object, mockSheet2.Object }.GetEnumerator());
-        
+
         mockSheet1.SetupGet(s => s.SectionType).Returns(SolidEdgeDraft.SheetSectionTypeConstants.igDrawingViewSection);
         mockSheet2.SetupGet(s => s.SectionType).Returns(SolidEdgeDraft.SheetSectionTypeConstants.igWorkingSection);
 
-        mockSheet2.SetupGet(s => s.DrawingObjects).Returns((SolidEdgeFrameworkSupport.DrawingObjects)null!); 
+        mockSheet2.SetupGet(s => s.DrawingObjects).Returns((SolidEdgeFrameworkSupport.DrawingObjects)null!);
 
         // Act
-        try {
+        try
+        {
             var result = mockSection.Object.EnumerateDrawingObjects().ToList();
-        } catch {
+        }
+        catch
+        {
             // Expected failure
         }
 

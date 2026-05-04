@@ -22,8 +22,7 @@ public class Line3DExtensionsTests
 
         // Assert
         CollectionAssert.AreEqual(positionData, result);
-        }
+    }
 
-
-    delegate void GetKeypointPositionCallback(SolidEdgePart.Sketch3DKeypointType type, ref Array position);
+    private delegate void GetKeypointPositionCallback(SolidEdgePart.Sketch3DKeypointType type, ref Array position);
 }

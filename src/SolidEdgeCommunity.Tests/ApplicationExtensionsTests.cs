@@ -1,6 +1,5 @@
 using Moq;
 using SolidEdgeCommunity.Extensions;
-using SolidEdgeFramework;
 using System.Diagnostics;
 
 namespace SolidEdgeCommunity.Tests;
@@ -55,7 +54,7 @@ public class ApplicationExtensionsTests
         var mockApp = new Mock<Application>();
         var mockEnvironments = new Mock<Environments>();
         var mockEnv = new Mock<SolidEdgeFramework.Environment>();
-        
+
         mockApp.SetupGet(a => a.Environments).Returns(mockEnvironments.Object);
         mockApp.SetupGet(a => a.ActiveEnvironment).Returns("Part");
         mockEnvironments.Setup(e => e.Item("Part")).Returns(mockEnv.Object);

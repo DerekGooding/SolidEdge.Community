@@ -1,6 +1,7 @@
 # SolidEdge.Community
 
-[![CI](https://github.com/SolidEdgeCommunity/SolidEdge.Community/actions/workflows/ci.yml/badge.svg)](https://github.com/SolidEdgeCommunity/SolidEdge.Community/actions/workflows/ci.yml)
+![Build Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=build)
+![Test Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=tests)
 [![codecov](https://codecov.io/gh/SolidEdgeCommunity/SolidEdge.Community/branch/master/graph/badge.svg?token=YOUR_TOKEN_HERE)](https://codecov.io/gh/SolidEdgeCommunity/SolidEdge.Community)
 
 A community-driven toolkit for automating Siemens Solid Edge using modern .NET.

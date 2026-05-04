@@ -1,5 +1,3 @@
-using SolidEdgeCommunity;
-
 namespace SolidEdgeCommunity.Tests;
 
 [TestClass]

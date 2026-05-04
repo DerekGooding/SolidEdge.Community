@@ -1,8 +1,5 @@
-using Moq;
 using SolidEdgeCommunity.Runtime.InteropServices;
-using SolidEdgeCommunity.Runtime.InteropServices.ComTypes;
 using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace SolidEdgeCommunity.Tests;
 

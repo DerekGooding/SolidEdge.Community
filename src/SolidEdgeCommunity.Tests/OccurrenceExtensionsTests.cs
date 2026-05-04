@@ -1,6 +1,5 @@
 using Moq;
 using SolidEdgeCommunity.Extensions;
-using SolidEdgeFramework;
 
 namespace SolidEdgeCommunity.Tests;
 
@@ -28,7 +27,7 @@ public class OccurrenceExtensionsTests
         var mockOcc = new Mock<SolidEdgeAssembly.Occurrence>();
         double[] matrixData = [1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 20, 30];
         Array matrix = matrixData;
-        
+
         mockOcc.Setup(o => o.GetMatrix(ref It.Ref<Array>.IsAny)).Callback(new GetMatrixCallback((ref Array m) => m = matrix));
 
         // Act
@@ -38,5 +37,5 @@ public class OccurrenceExtensionsTests
         CollectionAssert.AreEqual(matrixData, result);
     }
 
-    delegate void GetMatrixCallback(ref Array matrix);
+    private delegate void GetMatrixCallback(ref Array matrix);
 }

@@ -1,5 +1,3 @@
-using SolidEdgeCommunity;
-
 namespace SolidEdgeCommunity.Tests;
 
 [TestClass]
@@ -8,6 +6,7 @@ public class IsolatedTaskProxyTests
     private class TestProxy : IsolatedTaskProxy
     {
         public void TestInvoke(Action action) => InvokeSTAThread(action);
+
         public T TestInvoke<T>(Func<T> func) => InvokeSTAThread(func);
     }
 

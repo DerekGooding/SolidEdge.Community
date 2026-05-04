@@ -1,7 +1,5 @@
 using Moq;
 using SolidEdgeCommunity.Extensions;
-using SolidEdgeFramework;
-using System.Collections;
 
 namespace SolidEdgeCommunity.Tests;
 
@@ -21,7 +19,7 @@ public class DraftDocumentExtensionsTests
         mockDoc.Setup(d => d.Sheets).Returns(mockSheets.Object);
         mockSheets.SetupGet(s => s.Count).Returns(1);
         mockSheets.Setup(s => s.Item(1)).Returns(mockSheet.Object);
-        
+
         mockSheet.Setup(s => s.DrawingViews).Returns(mockViews.Object);
         mockViews.SetupGet(v => v.Count).Returns(1);
         mockViews.Setup(v => v.Item(1)).Returns(mockView.Object);

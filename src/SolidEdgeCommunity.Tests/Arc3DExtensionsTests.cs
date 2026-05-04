@@ -22,11 +22,11 @@ public class Arc3DExtensionsTests
 
         // Assert
         CollectionAssert.AreEqual(positionData, result);
-        }
+    }
 
-        [TestMethod]
-        public void SafeGetKeypointPosition_ShouldReturnEmpty_OnException_WhenThrowOnErrorFalse()
-        {
+    [TestMethod]
+    public void SafeGetKeypointPosition_ShouldReturnEmpty_OnException_WhenThrowOnErrorFalse()
+    {
         // Arrange
         var mockArc = new Mock<SolidEdgePart.Arc3D>();
         mockArc.Setup(a => a.GetKeypointPosition(It.IsAny<SolidEdgePart.Sketch3DKeypointType>(), ref It.Ref<Array>.IsAny))
@@ -37,11 +37,11 @@ public class Arc3DExtensionsTests
 
         // Assert
         Assert.AreEqual(0, result.Length);
-        }
+    }
 
-        [TestMethod]
-        public void SafeGetKeypointPosition_ShouldThrow_OnException_WhenThrowOnErrorTrue()
-        {
+    [TestMethod]
+    public void SafeGetKeypointPosition_ShouldThrow_OnException_WhenThrowOnErrorTrue()
+    {
         // Arrange
         var mockArc = new Mock<SolidEdgePart.Arc3D>();
         mockArc.Setup(a => a.GetKeypointPosition(It.IsAny<SolidEdgePart.Sketch3DKeypointType>(), ref It.Ref<Array>.IsAny))
@@ -49,8 +49,7 @@ public class Arc3DExtensionsTests
 
         // Act & Assert
         Assert.Throws<System.Runtime.InteropServices.COMException>(() => mockArc.Object.SafeGetKeypointPosition((SolidEdgePart.Sketch3DKeypointType)0, true));
-        }
+    }
 
-
-    delegate void GetKeypointPositionCallback(SolidEdgePart.Sketch3DKeypointType type, ref Array position);
+    private delegate void GetKeypointPositionCallback(SolidEdgePart.Sketch3DKeypointType type, ref Array position);
 }

@@ -1,6 +1,5 @@
 using Moq;
 using SolidEdgeCommunity.Extensions;
-using SolidEdgeFramework;
 
 namespace SolidEdgeCommunity.Tests;
 

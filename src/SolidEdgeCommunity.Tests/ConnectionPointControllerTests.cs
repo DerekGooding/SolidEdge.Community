@@ -1,5 +1,4 @@
 using Moq;
-using SolidEdgeCommunity;
 using System.Runtime.InteropServices.ComTypes;
 
 namespace SolidEdgeCommunity.Tests;
@@ -19,7 +18,7 @@ public class ConnectionPointControllerTests
 
         mockContainer.Setup(c => c.FindConnectionPoint(ref It.Ref<Guid>.IsAny, out It.Ref<IConnectionPoint>.IsAny))
             .Callback(new FindCPCallback((ref Guid g, out IConnectionPoint cp) => cp = mockCP.Object));
-        
+
         mockCP.Setup(cp => cp.Advise(sink, out cookie));
 
         // Act
@@ -29,5 +28,5 @@ public class ConnectionPointControllerTests
         mockCP.Verify(cp => cp.Advise(sink, out It.Ref<int>.IsAny), Times.Once);
     }
 
-    delegate void FindCPCallback(ref Guid guid, out IConnectionPoint cp);
+    private delegate void FindCPCallback(ref Guid guid, out IConnectionPoint cp);
 }

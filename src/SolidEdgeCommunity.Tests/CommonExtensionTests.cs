@@ -1,6 +1,5 @@
 using Moq;
 using SolidEdgeCommunity.Extensions;
-using SolidEdgeFramework;
 
 namespace SolidEdgeCommunity.Tests;
 
@@ -13,7 +12,7 @@ public class CommonExtensionTests
         var mock = new Mock<SolidEdgeAssembly.AssemblyDocument>();
         mock.SetupGet(d => d.CreatedVersion).Returns("1.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("2.0.0.0");
-        
+
         Assert.AreEqual(new Version("1.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("2.0.0.0"), mock.Object.GetLastSavedVersion());
     }
@@ -24,7 +23,7 @@ public class CommonExtensionTests
         var mock = new Mock<SolidEdgePart.PartDocument>();
         mock.SetupGet(d => d.CreatedVersion).Returns("3.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("4.0.0.0");
-        
+
         Assert.AreEqual(new Version("3.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("4.0.0.0"), mock.Object.GetLastSavedVersion());
     }
@@ -35,7 +34,7 @@ public class CommonExtensionTests
         var mock = new Mock<SolidEdgePart.SheetMetalDocument>();
         mock.SetupGet(d => d.CreatedVersion).Returns("5.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("6.0.0.0");
-        
+
         Assert.AreEqual(new Version("5.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("6.0.0.0"), mock.Object.GetLastSavedVersion());
     }
@@ -46,7 +45,7 @@ public class CommonExtensionTests
         var mock = new Mock<SolidEdgePart.WeldmentDocument>();
         mock.SetupGet(d => d.CreatedVersion).Returns("7.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("8.0.0.0");
-        
+
         Assert.AreEqual(new Version("7.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("8.0.0.0"), mock.Object.GetLastSavedVersion());
     }
