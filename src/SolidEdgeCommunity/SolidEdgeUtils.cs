@@ -23,7 +23,7 @@ public static class SolidEdgeUtils
     /// <returns>
     /// An object of type SolidEdgeFramework.Application.
     /// </returns>
-    public static SolidEdgeFramework.Application Connect() => Connect(startIfNotRunning: false);
+    public static Application Connect() => Connect(startIfNotRunning: false);
 
     /// <summary>
     /// Connects to or starts a new instance of Solid Edge.
@@ -32,12 +32,12 @@ public static class SolidEdgeUtils
     /// <returns>
     /// An object of type SolidEdgeFramework.Application.
     /// </returns>
-    public static SolidEdgeFramework.Application Connect(bool startIfNotRunning)
+    public static Application Connect(bool startIfNotRunning)
     {
         try
         {
             // Attempt to connect to a running instance of Solid Edge.
-            return (SolidEdgeFramework.Application)Marshal.GetActiveObject(SolidEdgeSDK.PROGID.SolidEdge_Application);
+            return (Application)Marshal.GetActiveObject(SolidEdgeSDK.PROGID.SolidEdge_Application);
         }
         catch (System.Runtime.InteropServices.COMException ex)
         {
@@ -70,14 +70,14 @@ public static class SolidEdgeUtils
     /// <returns>
     /// An object of type SolidEdgeFramework.Application.
     /// </returns>
-    public static SolidEdgeFramework.Application Connect(bool startIfNotRunning, bool ensureVisible)
+    public static Application Connect(bool startIfNotRunning, bool ensureVisible)
     {
-        SolidEdgeFramework.Application application = null;
+        Application application = null;
 
         try
         {
             // Attempt to connect to a running instance of Solid Edge.
-            application = (SolidEdgeFramework.Application)Marshal.GetActiveObject(SolidEdgeSDK.PROGID.SolidEdge_Application);
+            application = (Application)Marshal.GetActiveObject(SolidEdgeSDK.PROGID.SolidEdge_Application);
         }
         catch (System.Runtime.InteropServices.COMException ex)
         {
@@ -193,13 +193,13 @@ public static class SolidEdgeUtils
     /// <returns>
     /// An object of type SolidEdgeFramework.Application.
     /// </returns>
-    public static SolidEdgeFramework.Application Start()
+    public static Application Start()
     {
         // On a system where Solid Edge is installed, the COM ProgID will be
         // defined in registry: HKEY_CLASSES_ROOT\SolidEdge.Application
         Type t = Type.GetTypeFromProgID(progID: SolidEdgeSDK.PROGID.SolidEdge_Application, throwOnError: true);
 
         // Using the discovered Type, create and return a new instance of Solid Edge.
-        return (SolidEdgeFramework.Application)Activator.CreateInstance(type: t);
+        return (Application)Activator.CreateInstance(type: t);
     }
 }

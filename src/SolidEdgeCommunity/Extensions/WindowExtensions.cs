@@ -10,10 +10,10 @@ public static class WindowExtensions
     /// <summary>
     /// Returns an IntPtr representing the window handle.
     /// </summary>
-    public static IntPtr GetDrawHandle(this SolidEdgeFramework.Window window) => new(window.DrawHwnd);
+    public static IntPtr GetDrawHandle(this Window window) => new(window.DrawHwnd);
 
     /// <summary>
     /// Returns an IntPtr representing the window handle.
     /// </summary>
-    public static IntPtr GetHandle(this SolidEdgeFramework.Window window) => new(window.hWnd);
+    public static IntPtr GetHandle(this Window window) => new(window.hWnd);
 }

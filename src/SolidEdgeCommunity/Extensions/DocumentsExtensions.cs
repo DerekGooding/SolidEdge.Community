@@ -10,12 +10,12 @@ public static class DocumentsExtensions
     /// <summary>
     /// Creates a new document.
     /// </summary>
-    internal static TDocumentType Add<TDocumentType>(this SolidEdgeFramework.Documents documents, string progId) where TDocumentType : class => (TDocumentType)documents.Add(progId);
+    internal static TDocumentType Add<TDocumentType>(this Documents documents, string progId) where TDocumentType : class => (TDocumentType)documents.Add(progId);
 
     /// <summary>
     /// Creates a new document.
     /// </summary>
-    internal static TDocumentType Add<TDocumentType>(this SolidEdgeFramework.Documents documents, string progId, object TemplateDoc) where TDocumentType : class => (TDocumentType)documents.Add(progId, TemplateDoc);
+    internal static TDocumentType Add<TDocumentType>(this Documents documents, string progId, object TemplateDoc) where TDocumentType : class => (TDocumentType)documents.Add(progId, TemplateDoc);
 
     /// <summary>
     /// Creates a new document.
@@ -23,7 +23,7 @@ public static class DocumentsExtensions
     /// <typeparam name="TDocumentType">SolidEdgeAssembly.AssemblyDocument, SolidEdgeDraft.DraftDocument, SolidEdgePart.PartDocument or SolidEdgePart.SheetMetalDocument.</typeparam>
     /// <param name="documents"></param>
     /// <returns></returns>
-    public static TDocumentType Add<TDocumentType>(this SolidEdgeFramework.Documents documents) where TDocumentType : class
+    public static TDocumentType Add<TDocumentType>(this Documents documents) where TDocumentType : class
     {
         var t = typeof(TDocumentType);
 
@@ -52,62 +52,62 @@ public static class DocumentsExtensions
     /// <summary>
     /// Creates a new assembly document.
     /// </summary>
-    public static SolidEdgeAssembly.AssemblyDocument AddAssemblyDocument(this SolidEdgeFramework.Documents documents)
+    public static SolidEdgeAssembly.AssemblyDocument AddAssemblyDocument(this Documents documents)
         => documents.Add<SolidEdgeAssembly.AssemblyDocument>(SolidEdgeSDK.PROGID.SolidEdge_AssemblyDocument);
 
     /// <summary>
     /// Creates a new assembly document.
     /// </summary>
-    public static SolidEdgeAssembly.AssemblyDocument AddAssemblyDocument(this SolidEdgeFramework.Documents documents, object TemplateDoc)
+    public static SolidEdgeAssembly.AssemblyDocument AddAssemblyDocument(this Documents documents, object TemplateDoc)
         => documents.Add<SolidEdgeAssembly.AssemblyDocument>(SolidEdgeSDK.PROGID.SolidEdge_AssemblyDocument, TemplateDoc);
 
     /// <summary>
     /// Creates a new draft document.
     /// </summary>
-    public static SolidEdgeDraft.DraftDocument AddDraftDocument(this SolidEdgeFramework.Documents documents)
+    public static SolidEdgeDraft.DraftDocument AddDraftDocument(this Documents documents)
         => documents.Add<SolidEdgeDraft.DraftDocument>(SolidEdgeSDK.PROGID.SolidEdge_DraftDocument);
 
     /// <summary>
     /// Creates a new draft document.
     /// </summary>
-    public static SolidEdgeDraft.DraftDocument AddDraftDocument(this SolidEdgeFramework.Documents documents, object TemplateDoc)
+    public static SolidEdgeDraft.DraftDocument AddDraftDocument(this Documents documents, object TemplateDoc)
         => documents.Add<SolidEdgeDraft.DraftDocument>(SolidEdgeSDK.PROGID.SolidEdge_DraftDocument, TemplateDoc);
 
     /// <summary>
     /// Creates a new part document.
     /// </summary>
-    public static SolidEdgePart.PartDocument AddPartDocument(this SolidEdgeFramework.Documents documents)
+    public static SolidEdgePart.PartDocument AddPartDocument(this Documents documents)
         => documents.Add<SolidEdgePart.PartDocument>(SolidEdgeSDK.PROGID.SolidEdge_PartDocument);
 
     /// <summary>
     /// Creates a new part document.
     /// </summary>
-    public static SolidEdgePart.PartDocument AddPartDocument(this SolidEdgeFramework.Documents documents, object TemplateDoc)
+    public static SolidEdgePart.PartDocument AddPartDocument(this Documents documents, object TemplateDoc)
         => documents.Add<SolidEdgePart.PartDocument>(SolidEdgeSDK.PROGID.SolidEdge_PartDocument, TemplateDoc);
 
     /// <summary>
     /// Creates a new sheetMetal document.
     /// </summary>
-    public static SolidEdgePart.SheetMetalDocument AddSheetMetalDocument(this SolidEdgeFramework.Documents documents)
+    public static SolidEdgePart.SheetMetalDocument AddSheetMetalDocument(this Documents documents)
         => documents.Add<SolidEdgePart.SheetMetalDocument>(SolidEdgeSDK.PROGID.SolidEdge_SheetMetalDocument);
 
     /// <summary>
     /// Creates a new sheetMetal document.
     /// </summary>
-    public static SolidEdgePart.SheetMetalDocument AddSheetMetalDocument(this SolidEdgeFramework.Documents documents, object TemplateDoc)
+    public static SolidEdgePart.SheetMetalDocument AddSheetMetalDocument(this Documents documents, object TemplateDoc)
         => documents.Add<SolidEdgePart.SheetMetalDocument>(SolidEdgeSDK.PROGID.SolidEdge_SheetMetalDocument, TemplateDoc);
 
     /// <summary>
     /// Opens an existing Solid Edge document.
     /// </summary>
-    public static TDocumentType Open<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename)
+    public static TDocumentType Open<TDocumentType>(this Documents documents, string Filename)
         where TDocumentType : class => (TDocumentType)documents.Open(Filename);
 
     /// <summary>
     /// Opens an existing Solid Edge document.
     /// </summary>
     public static TDocumentType Open<TDocumentType>(
-        this SolidEdgeFramework.Documents documents,
+        this Documents documents,
         string Filename,
         object DocRelationAutoServer,
         object AltPath,
@@ -124,7 +124,7 @@ public static class DocumentsExtensions
     /// <summary>
     /// Opens an existing Solid Edge document in the background with no window.
     /// </summary>
-    public static TDocumentType OpenInBackground<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename)
+    public static TDocumentType OpenInBackground<TDocumentType>(this Documents documents, string Filename)
     {
         const ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
         return (TDocumentType)documents.Open(Filename, JDOCUMENTPROP_NOWINDOW);
@@ -134,7 +134,7 @@ public static class DocumentsExtensions
     /// Opens an existing Solid Edge document in the background with no window.
     /// </summary>
     public static TDocumentType OpenInBackground<TDocumentType>(
-        this SolidEdgeFramework.Documents documents,
+        this Documents documents,
         string Filename,
         object AltPath,
         object RecognizeFeaturesIfPartTemplate,

@@ -15,23 +15,23 @@ public static class ApplicationExtensions
     /// </summary>
     /// <param name="application"></param>
     /// <param name="CmdFlags"></param>
-    public static SolidEdgeFramework.Command CreateCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.seCmdFlag CmdFlags) => application.CreateCommand((int)CmdFlags);
+    public static Command CreateCommand(this Application application, SolidEdgeConstants.seCmdFlag CmdFlags) => application.CreateCommand((int)CmdFlags);
 
     /// <summary>
     /// Returns the currently active document.
     /// </summary>
     /// <remarks>An exception will be thrown if there is no active document.</remarks>
-    public static SolidEdgeFramework.SolidEdgeDocument GetActiveDocument(this SolidEdgeFramework.Application application) => application.GetActiveDocument(true);
+    public static SolidEdgeDocument GetActiveDocument(this Application application) => application.GetActiveDocument(true);
 
     /// <summary>
     /// Returns the currently active document.
     /// </summary>
-    public static SolidEdgeFramework.SolidEdgeDocument GetActiveDocument(this SolidEdgeFramework.Application application, bool throwOnError)
+    public static SolidEdgeDocument GetActiveDocument(this Application application, bool throwOnError)
     {
         try
         {
             // ActiveDocument will throw an exception if no document is open.
-            return (SolidEdgeFramework.SolidEdgeDocument)application.ActiveDocument;
+            return (SolidEdgeDocument)application.ActiveDocument;
         }
         catch when (!throwOnError)
         {
@@ -45,13 +45,13 @@ public static class ApplicationExtensions
     /// </summary>
     /// <typeparam name="T">The type to return.</typeparam>
     /// /// <remarks>An exception will be thrown if there is no active document or if the cast fails.</remarks>
-    public static T GetActiveDocument<T>(this SolidEdgeFramework.Application application) where T : class => application.GetActiveDocument<T>(true);
+    public static T GetActiveDocument<T>(this Application application) where T : class => application.GetActiveDocument<T>(true);
 
     /// <summary>
     /// Returns the currently active document.
     /// </summary>
     /// <typeparam name="T">The type to return.</typeparam>
-    public static T GetActiveDocument<T>(this SolidEdgeFramework.Application application, bool throwOnError) where T : class
+    public static T GetActiveDocument<T>(this Application application, bool throwOnError) where T : class
     {
         try
         {
@@ -68,9 +68,9 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns the environment that belongs to the current active window of the document.
     /// </summary>
-    public static SolidEdgeFramework.Environment GetActiveEnvironment(this SolidEdgeFramework.Application application)
+    public static SolidEdgeFramework.Environment GetActiveEnvironment(this Application application)
     {
-        SolidEdgeFramework.Environments environments = application.Environments;
+        Environments environments = application.Environments;
         return environments.Item(application.ActiveEnvironment);
     }
 
@@ -93,7 +93,7 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns an environment specified by CATID.
     /// </summary>
-    public static SolidEdgeFramework.Environment GetEnvironment(this SolidEdgeFramework.Application application, string CATID)
+    public static SolidEdgeFramework.Environment GetEnvironment(this Application application, string CATID)
     {
         var guid1 = new Guid(CATID);
 
@@ -128,7 +128,7 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns the value of a specified global constant.
     /// </summary>
-    public static object GetGlobalParameter(this SolidEdgeFramework.Application application, SolidEdgeFramework.ApplicationGlobalConstants globalConstant)
+    public static object GetGlobalParameter(this Application application, ApplicationGlobalConstants globalConstant)
     {
         object value = null;
         application.GetGlobalParameter(globalConstant, ref value);
@@ -139,7 +139,7 @@ public static class ApplicationExtensions
     /// Returns the value of a specified global constant.
     /// </summary>
     /// <typeparam name="T">The type to return.</typeparam>
-    public static T GetGlobalParameter<T>(this SolidEdgeFramework.Application application, SolidEdgeFramework.ApplicationGlobalConstants globalConstant)
+    public static T GetGlobalParameter<T>(this Application application, ApplicationGlobalConstants globalConstant)
     {
         object value = null;
         application.GetGlobalParameter(globalConstant, ref value);
@@ -149,7 +149,7 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns a NativeWindow object that represents the main application window.
     /// </summary>
-    public static NativeWindow GetNativeWindow(this SolidEdgeFramework.Application application) => NativeWindow.FromHandle(new IntPtr(application.hWnd));
+    public static NativeWindow GetNativeWindow(this Application application) => NativeWindow.FromHandle(new IntPtr(application.hWnd));
 
     ///// <summary>
     ///// Returns the new file UI events.
@@ -170,7 +170,7 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns a Process object that represents the application process.
     /// </summary>
-    public static Process GetProcess(this SolidEdgeFramework.Application application) => Process.GetProcessById(application.ProcessID);
+    public static Process GetProcess(this Application application) => Process.GetProcessById(application.ProcessID);
 
     ///// <summary>
     ///// Returns the shortcut menu events.
@@ -183,118 +183,118 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns a Version object that represents the application version.
     /// </summary>
-    public static Version GetVersion(this SolidEdgeFramework.Application application) => new(application.Version);
+    public static Version GetVersion(this Application application) => new(application.Version);
 
     /// <summary>
     /// Returns a point object to the application main window.
     /// </summary>
-    public static IntPtr GetWindowHandle(this SolidEdgeFramework.Application application) => new(application.hWnd);
+    public static IntPtr GetWindowHandle(this Application application) => new(application.hWnd);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.AssemblyCommandConstants CommandID)
-        => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.AssemblyCommandConstants CommandID)
+        => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.CuttingPlaneLineCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.CuttingPlaneLineCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.DetailCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.DetailCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.DrawingViewEditCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.DrawingViewEditCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.ExplodeCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.ExplodeCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.LayoutCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.LayoutCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.LayoutInPartCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.LayoutInPartCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.MotionCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.MotionCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.PartCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.PartCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.ProfileCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.ProfileCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.ProfileHoleCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.ProfileHoleCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.ProfilePatternCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.ProfilePatternCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.ProfileRevolvedCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.ProfileRevolvedCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.SheetMetalCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.SheetMetalCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.SimplifyCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.SimplifyCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.SolidEdgeCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.SolidEdgeCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.StudioCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.StudioCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.TubingCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.TubingCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.WeldmentCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeConstants.WeldmentCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Activates a specified Solid Edge command.
     /// </summary>
-    public static void StartCommand(this SolidEdgeFramework.Application application, SolidEdgeFramework.SolidEdgeCommandConstants CommandID) => application.StartCommand((SolidEdgeFramework.SolidEdgeCommandConstants)CommandID);
+    public static void StartCommand(this Application application, SolidEdgeCommandConstants CommandID) => application.StartCommand((SolidEdgeCommandConstants)CommandID);
 
     /// <summary>
     /// Shows the form with the application main window as the owner.
     /// </summary>
-    public static void Show(this SolidEdgeFramework.Application application, Form form)
+    public static void Show(this Application application, Form form)
     {
         ArgumentNullException.ThrowIfNull(form);
 
@@ -304,12 +304,12 @@ public static class ApplicationExtensions
     /// <summary>
     /// Shows the form as a modal dialog box with the application main window as the owner.
     /// </summary>
-    public static DialogResult ShowDialog(this SolidEdgeFramework.Application application, Form form)
+    public static DialogResult ShowDialog(this Application application, Form form)
         => form == null ? throw new ArgumentNullException(nameof(form)) : form.ShowDialog(application.GetNativeWindow());
 
     /// <summary>
     /// Shows the form as a modal dialog box with the application main window as the owner.
     /// </summary>
-    public static DialogResult ShowDialog(this SolidEdgeFramework.Application application, CommonDialog dialog)
+    public static DialogResult ShowDialog(this Application application, CommonDialog dialog)
         => dialog == null ? throw new ArgumentNullException(nameof(dialog)) : dialog.ShowDialog(application.GetNativeWindow());
 }

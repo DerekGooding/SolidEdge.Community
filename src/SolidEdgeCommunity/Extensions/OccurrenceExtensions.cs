@@ -12,8 +12,8 @@ public static class OccurrenceExtensions
     /// Returns the version of Solid Edge that was used to create the referenced document.
     /// </summary>
     /// <param name="occurrence"></param>
-    public static SolidEdgeFramework.SolidEdgeDocument GetOccurrenceDocument(this SolidEdgeAssembly.Occurrence occurrence)
-        => occurrence as SolidEdgeFramework.SolidEdgeDocument;
+    public static SolidEdgeDocument GetOccurrenceDocument(this SolidEdgeAssembly.Occurrence occurrence)
+        => occurrence as SolidEdgeDocument;
 
     /// <summary>
     /// Returns a strongly typed occurrence document.

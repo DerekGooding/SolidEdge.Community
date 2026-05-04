@@ -466,19 +466,19 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
     /// <summary>
     /// Solid Edge Application property.
     /// </summary>
-    public SolidEdgeFramework.Application Application
+    public Application Application
     {
         get;
-        set => field = UnwrapRuntimeCallableWrapper<SolidEdgeFramework.Application>(value);
+        set => field = UnwrapRuntimeCallableWrapper<Application>(value);
     }
 
     /// <summary>
     /// Solid Edge Application property.
     /// </summary>
-    public SolidEdgeFramework.SolidEdgeDocument Document
+    public SolidEdgeDocument Document
     {
         get;
-        set => field = UnwrapRuntimeCallableWrapper<SolidEdgeFramework.SolidEdgeDocument>(value);
+        set => field = UnwrapRuntimeCallableWrapper<SolidEdgeDocument>(value);
     }
 
     /// <summary>

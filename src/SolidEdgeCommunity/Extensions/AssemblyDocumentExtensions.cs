@@ -26,19 +26,19 @@ public static class AssemblyDocumentExtensions
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static SolidEdgeFramework.PropertySets GetProperties(this SolidEdgeAssembly.AssemblyDocument document) => document.Properties as SolidEdgeFramework.PropertySets;
+    public static PropertySets GetProperties(this SolidEdgeAssembly.AssemblyDocument document) => document.Properties as PropertySets;
 
     /// <summary>
     /// Returns the summary information property set for the referenced document.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static SolidEdgeFramework.SummaryInfo GetSummaryInfo(this SolidEdgeAssembly.AssemblyDocument document) => document.SummaryInfo as SolidEdgeFramework.SummaryInfo;
+    public static SummaryInfo GetSummaryInfo(this SolidEdgeAssembly.AssemblyDocument document) => document.SummaryInfo as SummaryInfo;
 
     /// <summary>
     /// Returns a collection of variables for the referenced document.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static SolidEdgeFramework.Variables GetVariables(this SolidEdgeAssembly.AssemblyDocument document) => document.Variables as SolidEdgeFramework.Variables;
+    public static Variables GetVariables(this SolidEdgeAssembly.AssemblyDocument document) => document.Variables as Variables;
 }

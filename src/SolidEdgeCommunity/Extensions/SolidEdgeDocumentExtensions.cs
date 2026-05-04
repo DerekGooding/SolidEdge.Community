@@ -12,33 +12,33 @@ public static class SolidEdgeDocumentExtensions
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static Version GetCreatedVersion(this SolidEdgeFramework.SolidEdgeDocument document) => new(document.CreatedVersion);
+    public static Version GetCreatedVersion(this SolidEdgeDocument document) => new(document.CreatedVersion);
 
     /// <summary>
     /// Returns the version of Solid Edge that was used the last time the referenced document was saved.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static Version GetLastSavedVersion(this SolidEdgeFramework.SolidEdgeDocument document) => new(document.LastSavedVersion);
+    public static Version GetLastSavedVersion(this SolidEdgeDocument document) => new(document.LastSavedVersion);
 
     /// <summary>
     /// Returns the properties for the referenced document.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static SolidEdgeFramework.PropertySets GetProperties(this SolidEdgeFramework.SolidEdgeDocument document) => document.Properties as SolidEdgeFramework.PropertySets;
+    public static PropertySets GetProperties(this SolidEdgeDocument document) => document.Properties as PropertySets;
 
     /// <summary>
     /// Returns the summary information property set for the referenced document.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static SolidEdgeFramework.SummaryInfo GetSummaryInfo(this SolidEdgeFramework.SolidEdgeDocument document) => document.SummaryInfo as SolidEdgeFramework.SummaryInfo;
+    public static SummaryInfo GetSummaryInfo(this SolidEdgeDocument document) => document.SummaryInfo as SummaryInfo;
 
     /// <summary>
     /// Returns a collection of variables for the referenced document.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static SolidEdgeFramework.Variables GetVariables(this SolidEdgeFramework.SolidEdgeDocument document) => document.Variables as SolidEdgeFramework.Variables;
+    public static Variables GetVariables(this SolidEdgeDocument document) => document.Variables as Variables;
 }

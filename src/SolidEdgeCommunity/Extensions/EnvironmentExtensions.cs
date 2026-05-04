@@ -116,7 +116,7 @@ public static class EnvironmentExtensions
     /// <summary>
     /// Returns a SolidEdgeFramework.Environment by name.
     /// </summary>
-    public static SolidEdgeFramework.Environment LookupByName(this SolidEdgeFramework.Environments environments, string name)
+    public static SolidEdgeFramework.Environment LookupByName(this Environments environments, string name)
     {
         for (int i = 1; i <= environments.Count; i++)
         {
@@ -133,7 +133,7 @@ public static class EnvironmentExtensions
     /// <summary>
     /// Returns a SolidEdgeFramework.Environment by category id..
     /// </summary>
-    public static SolidEdgeFramework.Environment LookupByCategoryId(this SolidEdgeFramework.Environments environments, Guid categoryId)
+    public static SolidEdgeFramework.Environment LookupByCategoryId(this Environments environments, Guid categoryId)
     {
         for (int i = 1; i <= environments.Count; i++)
         {
