@@ -5,9 +5,9 @@
     <Authors>Derek Gooding</Authors>
     <Company>Derek Gooding</Company>
     <Description>Community provided package for automating Solid Edge.</Description>
-    <PackageLicenseUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community/blob/master/LICENSE.md</PackageLicenseUrl>
+    <License>https://github.com/SolidEdgeCommunity/SolidEdge.Community/blob/master/LICENSE.md</License>
     <PackageProjectUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/icon.png</PackageIconUrl>
+    <Icon>https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/icon.png</Icon>
     <RepositoryUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>interop solidedge community contrib</PackageTags>
