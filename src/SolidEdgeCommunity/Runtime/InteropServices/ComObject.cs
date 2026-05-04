@@ -20,11 +20,9 @@ public static class ComObject
     /// <returns></returns>
     public static ITypeInfo GetITypeInfo(object comObject)
     {
-        if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+        if (!System.Runtime.InteropServices.Marshal.IsComObject(comObject)) throw new InvalidComObjectException();
 
-        var dispatch = comObject as IDispatch;
-
-        if (dispatch != null)
+        if (comObject is IDispatch dispatch)
         {
             return dispatch.GetTypeInfo(0, LOCALE_SYSTEM_DEFAULT);
         }
@@ -41,7 +39,7 @@ public static class ComObject
     /// <returns></returns>
     public static T GetPropertyValue<T>(object comObject, string name)
     {
-        if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+        if (!System.Runtime.InteropServices.Marshal.IsComObject(comObject)) throw new InvalidComObjectException();
 
         var type = comObject.GetType();
         var value = type.InvokeMember(name, System.Reflection.BindingFlags.GetProperty, null, comObject, null);
@@ -59,7 +57,7 @@ public static class ComObject
     /// <returns></returns>
     public static T GetPropertyValue<T>(object comObject, string name, T defaultValue)
     {
-        if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+        if (!System.Runtime.InteropServices.Marshal.IsComObject(comObject)) throw new InvalidComObjectException();
 
         var type = comObject.GetType();
 
@@ -81,21 +79,20 @@ public static class ComObject
     /// <returns></returns>
     public static Type GetType(object comObject)
     {
-        if (System.Runtime.InteropServices.Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+        if (!System.Runtime.InteropServices.Marshal.IsComObject(comObject)) throw new InvalidComObjectException();
 
         Type type = null;
-        var dispatch = comObject as IDispatch;
         ITypeInfo typeInfo = null;
         var pTypeAttr = IntPtr.Zero;
-        var typeAttr = default(System.Runtime.InteropServices.ComTypes.TYPEATTR);
+        var typeAttr = default(TYPEATTR);
 
         try
         {
-            if (dispatch != null)
+            if (comObject is IDispatch dispatch)
             {
                 typeInfo = dispatch.GetTypeInfo(0, LOCALE_SYSTEM_DEFAULT);
                 typeInfo.GetTypeAttr(out pTypeAttr);
-                typeAttr = (System.Runtime.InteropServices.ComTypes.TYPEATTR)System.Runtime.InteropServices.Marshal.PtrToStructure(pTypeAttr, typeof(System.Runtime.InteropServices.ComTypes.TYPEATTR));
+                typeAttr = System.Runtime.InteropServices.Marshal.PtrToStructure<TYPEATTR>(pTypeAttr);
 
                 // Type can technically be defined in any loaded assembly.
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -105,8 +102,7 @@ public static class ComObject
                 {
                     type = assembly.GetTypes()
                         .Where(x => x.IsInterface)
-                        .Where(x => x.GUID.Equals(typeAttr.guid))
-                        .FirstOrDefault();
+                        .FirstOrDefault(x => x.GUID.Equals(typeAttr.guid));
 
                     if (type != null)
                     {

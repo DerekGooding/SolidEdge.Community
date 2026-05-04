@@ -45,7 +45,7 @@ public static class OccurrenceExtensions
     {
         Array matrix = Array.CreateInstance(typeof(double), 0);
         occurrence.GetBodyInversionMatrix(ref matrix);
-        return matrix.OfType<double>().ToArray();
+        return [.. matrix.OfType<double>()];
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public static class OccurrenceExtensions
     {
         Array matrix = Array.CreateInstance(typeof(double), 0);
         occurrence.GetExplodeMatrix(ref matrix);
-        return matrix.OfType<double>().ToArray();
+        return [.. matrix.OfType<double>()];
     }
 
     /// <summary>
@@ -65,6 +65,6 @@ public static class OccurrenceExtensions
     {
         Array matrix = Array.CreateInstance(typeof(double), 0);
         occurrence.GetMatrix(ref matrix);
-        return matrix.OfType<double>().ToArray();
+        return [.. matrix.OfType<double>()];
     }
 }

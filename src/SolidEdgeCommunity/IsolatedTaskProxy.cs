@@ -8,9 +8,6 @@ namespace SolidEdgeCommunity;
 /// </summary>
 public abstract class IsolatedTaskProxy : MarshalByRefObject
 {
-    private SolidEdgeFramework.Application _application;
-    private SolidEdgeFramework.SolidEdgeDocument _document;
-
     /// <summary>
     /// Lifetime services as disabled by default.
     /// </summary>
@@ -47,7 +44,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception);
@@ -85,7 +82,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -128,7 +125,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -173,7 +170,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -220,7 +217,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -262,7 +259,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -308,7 +305,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -356,7 +353,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -406,7 +403,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
         if (exception != null)
@@ -446,7 +443,7 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
             {
                 returnValue = target(arg1, arg2, arg3, arg4);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 exception = ex;
             }
@@ -458,15 +455,12 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
         // Start the thread.
         thread.Start();
 
-        // Wait for the thead to finish.
+        // Wait for the thread to finish.
         thread.Join();
 
-        if (exception != null)
-        {
-            throw new System.Exception("An unhandled exception has occurred. See inner exception for details.", exception);
-        }
-
-        return returnValue;
+        return exception != null
+            ? throw new Exception("An unhandled exception has occurred. See inner exception for details.", exception)
+            : returnValue;
     }
 
     /// <summary>
@@ -474,11 +468,8 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
     /// </summary>
     public SolidEdgeFramework.Application Application
     {
-        get { return _application; }
-        set
-        {
-            _application = UnwrapRuntimeCallableWrapper<SolidEdgeFramework.Application>(value);
-        }
+        get;
+        set => field = UnwrapRuntimeCallableWrapper<SolidEdgeFramework.Application>(value);
     }
 
     /// <summary>
@@ -486,11 +477,8 @@ public abstract class IsolatedTaskProxy : MarshalByRefObject
     /// </summary>
     public SolidEdgeFramework.SolidEdgeDocument Document
     {
-        get { return _document; }
-        set
-        {
-            _document = UnwrapRuntimeCallableWrapper<SolidEdgeFramework.SolidEdgeDocument>(value);
-        }
+        get;
+        set => field = UnwrapRuntimeCallableWrapper<SolidEdgeFramework.SolidEdgeDocument>(value);
     }
 
     /// <summary>

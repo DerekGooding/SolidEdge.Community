@@ -10,7 +10,7 @@ public static class EnvironmentExtensions
     /// <summary>
     /// Returns a Guid representing the environment category.
     /// </summary>
-    public static Guid GetCategoryId(this SolidEdgeFramework.Environment environment) => new Guid(environment.CATID);
+    public static Guid GetCategoryId(this SolidEdgeFramework.Environment environment) => new(environment.CATID);
 
     /// <summary>
     /// Returns a Type representing the corresponding command constants for a particular environment.

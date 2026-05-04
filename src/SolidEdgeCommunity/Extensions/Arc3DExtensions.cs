@@ -21,6 +21,6 @@ public static class Arc3DExtensions
         {
         }
 
-        return position.OfType<double>().ToArray();
+        return [.. position.OfType<double>()];
     }
 }

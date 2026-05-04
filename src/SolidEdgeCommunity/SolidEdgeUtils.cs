@@ -60,11 +60,6 @@ public static class SolidEdgeUtils
                     throw;
             }
         }
-        catch
-        {
-            // Rethrow exception.
-            throw;
-        }
     }
 
     /// <summary>

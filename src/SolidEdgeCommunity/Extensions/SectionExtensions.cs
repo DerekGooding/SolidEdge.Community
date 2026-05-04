@@ -23,8 +23,6 @@ public static class SectionExtensions
     /// <summary>
     /// Returns an enumerable collection of drawing objects of the specified type.
     /// </summary>
-    /// <param name="document"></param>
-    /// <returns></returns>
     public static IEnumerable<T> EnumerateDrawingObjects<T>(this SolidEdgeDraft.Section section) where T : class
     {
         foreach (SolidEdgeDraft.Sheet sheet in section.Sheets)
@@ -42,9 +40,9 @@ public static class SectionExtensions
             {
                 var drawingObject = drawingObjects.Item(i);
 
-                if (drawingObject is T)
+                if (drawingObject is T t)
                 {
-                    yield return (T)drawingObject;
+                    yield return t;
                 }
             }
         }

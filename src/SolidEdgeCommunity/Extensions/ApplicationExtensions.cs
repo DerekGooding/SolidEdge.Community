@@ -168,7 +168,7 @@ public static class ApplicationExtensions
     //}
 
     /// <summary>
-    /// Returns a Process object that represents the application prcoess.
+    /// Returns a Process object that represents the application process.
     /// </summary>
     public static Process GetProcess(this SolidEdgeFramework.Application application) => Process.GetProcessById(application.ProcessID);
 
@@ -183,12 +183,12 @@ public static class ApplicationExtensions
     /// <summary>
     /// Returns a Version object that represents the application version.
     /// </summary>
-    public static Version GetVersion(this SolidEdgeFramework.Application application) => new Version(application.Version);
+    public static Version GetVersion(this SolidEdgeFramework.Application application) => new(application.Version);
 
     /// <summary>
     /// Returns a point object to the application main window.
     /// </summary>
-    public static IntPtr GetWindowHandle(this SolidEdgeFramework.Application application) => new IntPtr(application.hWnd);
+    public static IntPtr GetWindowHandle(this SolidEdgeFramework.Application application) => new(application.hWnd);
 
     /// <summary>
     /// Activates a specified Solid Edge command.

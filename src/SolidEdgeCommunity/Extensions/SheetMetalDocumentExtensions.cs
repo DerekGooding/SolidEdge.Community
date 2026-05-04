@@ -12,14 +12,14 @@ public static class SheetMetalDocumentExtensions
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static Version GetCreatedVersion(this SolidEdgePart.SheetMetalDocument document) => new Version(document.CreatedVersion);
+    public static Version GetCreatedVersion(this SolidEdgePart.SheetMetalDocument document) => new(document.CreatedVersion);
 
     /// <summary>
     /// Returns the version of Solid Edge that was used the last time the referenced document was saved.
     /// </summary>
     /// <param name="document"></param>
     /// <returns></returns>
-    public static Version GetLastSavedVersion(this SolidEdgePart.SheetMetalDocument document) => new Version(document.LastSavedVersion);
+    public static Version GetLastSavedVersion(this SolidEdgePart.SheetMetalDocument document) => new(document.LastSavedVersion);
 
     /// <summary>
     /// Returns the properties for the referenced document.
