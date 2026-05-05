@@ -2,6 +2,7 @@
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=build)
 ![Test Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=tests)
+![Coverage](https://img.shields.io/badge/coverage-80%25-brightgreen)
 
 A community-driven toolkit for automating Siemens Solid Edge using modern .NET.
  This project provides a set of high-level abstractions, extension methods, and utilities to simplify COM interop and enhance developer productivity.
