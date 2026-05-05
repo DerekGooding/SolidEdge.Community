@@ -52,7 +52,7 @@ public static class PropertySetsExtensions
             SolidEdgeFileProperties.Property property = (SolidEdgeFileProperties.Property)customPropertySet[propertyName];
 
             // If we get here, the custom property exists so update the value.
-            ((SolidEdgeFileProperties.Property)null).Value = propertyValue;
+            property.Value = propertyValue;
         }
         catch (System.Runtime.InteropServices.COMException)
         {

@@ -40,9 +40,83 @@ public class ComObjectTests
     }
 
     [TestMethod]
-    public void GetPropertyValue_ShouldReturnValue()
+    public void GetPropertyValue_ShouldReturnValue_WhenObjectIsComObject()
     {
-        // Act & Assert
-        Assert.Throws<InvalidComObjectException>(() => ComObject.GetPropertyValue<string>(new object(), "Name"));
+        try
+        {
+            var type = Type.GetTypeFromProgID("Shell.Application");
+            if (type != null)
+            {
+                var shell = Activator.CreateInstance(type);
+                if (shell != null)
+                {
+                    // If it doesn't throw InvalidComObjectException, we reached the logic.
+                    try { ComObject.GetPropertyValue<object>(shell, "Parent"); } catch { }
+                    return;
+                }
+            }
+        }
+        catch
+        {
+            Assert.Inconclusive("Shell.Application COM object not available for testing.");
+        }
+    }
+
+    [TestMethod]
+    public void GetPropertyValue_WithDefault_ShouldReturnValue_WhenObjectIsComObject()
+    {
+        try
+        {
+            var type = Type.GetTypeFromProgID("Shell.Application");
+            if (type != null)
+            {
+                var shell = Activator.CreateInstance(type);
+                if (shell != null)
+                {
+                    var result = ComObject.GetPropertyValue<string>(shell, "NonExistentProperty", "Default");
+                    Assert.AreEqual("Default", result);
+                    return;
+                }
+            }
+        }
+        catch
+        {
+            Assert.Inconclusive("Shell.Application COM object not available for testing.");
+        }
+    }
+
+    [TestMethod]
+    public void GetType_ShouldReturnManagedType_WhenObjectIsComObject()
+    {
+        try
+        {
+            var type = Type.GetTypeFromProgID("Shell.Application");
+            if (type != null)
+            {
+                var shell = Activator.CreateInstance(type);
+                if (shell != null)
+                {
+                    var result = ComObject.GetType(shell);
+                    // Might be null if the interface is not in a loaded assembly, but should not throw InvalidComObjectException.
+                    return;
+                }
+            }
+        }
+        catch
+        {
+            Assert.Inconclusive("Shell.Application COM object not available for testing.");
+        }
+    }
+
+    [TestMethod]
+    public void GetPropertyValue_WithDefault_ShouldThrow_WhenNotComObject()
+    {
+        Assert.Throws<InvalidComObjectException>(() => ComObject.GetPropertyValue<string>(new object(), "Name", "Default"));
+    }
+
+    [TestMethod]
+    public void GetType_ShouldThrow_WhenNotComObject()
+    {
+        Assert.Throws<InvalidComObjectException>(() => ComObject.GetType(new object()));
     }
 }

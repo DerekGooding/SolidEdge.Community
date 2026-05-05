@@ -25,8 +25,12 @@ public static class SectionExtensions
     /// </summary>
     public static IEnumerable<T> EnumerateDrawingObjects<T>(this SolidEdgeDraft.Section section) where T : class
     {
-        foreach (SolidEdgeDraft.Sheet sheet in section.Sheets)
+        var sheets = section.Sheets;
+
+        for (int i = 1; i <= sheets.Count; i++)
         {
+            var sheet = sheets.Item(i);
+
             // The following section types are hidden and should not be used.
             if (sheet.SectionType == SolidEdgeDraft.SheetSectionTypeConstants.igDrawingViewSection) continue;
             if (sheet.SectionType == SolidEdgeDraft.SheetSectionTypeConstants.igBlockViewSection) continue;
@@ -36,9 +40,9 @@ public static class SectionExtensions
 
             var drawingObjects = sheet.DrawingObjects;
 
-            for (int i = 1; i <= drawingObjects.Count; i++)
+            for (int j = 1; j <= drawingObjects.Count; j++)
             {
-                var drawingObject = drawingObjects.Item(i);
+                var drawingObject = drawingObjects.Item(j);
 
                 if (drawingObject is T t)
                 {

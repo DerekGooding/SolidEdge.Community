@@ -10,44 +10,84 @@ public class CommonExtensionTests
     public void AssemblyDocument_Extensions_ShouldWork()
     {
         var mock = new Mock<SolidEdgeAssembly.AssemblyDocument>();
+        var mockProps = new Mock<PropertySets>();
+        var mockSummary = new Mock<SummaryInfo>();
+        var mockVars = new Mock<Variables>();
+
         mock.SetupGet(d => d.CreatedVersion).Returns("1.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("2.0.0.0");
+        mock.SetupGet(d => d.Properties).Returns(mockProps.Object);
+        mock.SetupGet(d => d.SummaryInfo).Returns(mockSummary.Object);
+        mock.SetupGet(d => d.Variables).Returns(mockVars.Object);
 
         Assert.AreEqual(new Version("1.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("2.0.0.0"), mock.Object.GetLastSavedVersion());
+        Assert.AreSame(mockProps.Object, mock.Object.GetProperties());
+        Assert.AreSame(mockSummary.Object, mock.Object.GetSummaryInfo());
+        Assert.AreSame(mockVars.Object, mock.Object.GetVariables());
     }
 
     [TestMethod]
     public void PartDocument_Extensions_ShouldWork()
     {
         var mock = new Mock<SolidEdgePart.PartDocument>();
+        var mockProps = new Mock<PropertySets>();
+        var mockSummary = new Mock<SummaryInfo>();
+        var mockVars = new Mock<Variables>();
+
         mock.SetupGet(d => d.CreatedVersion).Returns("3.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("4.0.0.0");
+        mock.SetupGet(d => d.Properties).Returns(mockProps.Object);
+        mock.SetupGet(d => d.SummaryInfo).Returns(mockSummary.Object);
+        mock.SetupGet(d => d.Variables).Returns(mockVars.Object);
 
         Assert.AreEqual(new Version("3.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("4.0.0.0"), mock.Object.GetLastSavedVersion());
+        Assert.AreSame(mockProps.Object, mock.Object.GetProperties());
+        Assert.AreSame(mockSummary.Object, mock.Object.GetSummaryInfo());
+        Assert.AreSame(mockVars.Object, mock.Object.GetVariables());
     }
 
     [TestMethod]
     public void SheetMetalDocument_Extensions_ShouldWork()
     {
         var mock = new Mock<SolidEdgePart.SheetMetalDocument>();
+        var mockProps = new Mock<PropertySets>();
+        var mockSummary = new Mock<SummaryInfo>();
+        var mockVars = new Mock<Variables>();
+
         mock.SetupGet(d => d.CreatedVersion).Returns("5.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("6.0.0.0");
+        mock.SetupGet(d => d.Properties).Returns(mockProps.Object);
+        mock.SetupGet(d => d.SummaryInfo).Returns(mockSummary.Object);
+        mock.SetupGet(d => d.Variables).Returns(mockVars.Object);
 
         Assert.AreEqual(new Version("5.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("6.0.0.0"), mock.Object.GetLastSavedVersion());
+        Assert.AreSame(mockProps.Object, mock.Object.GetProperties());
+        Assert.AreSame(mockSummary.Object, mock.Object.GetSummaryInfo());
+        Assert.AreSame(mockVars.Object, mock.Object.GetVariables());
     }
 
     [TestMethod]
     public void WeldmentDocument_Extensions_ShouldWork()
     {
         var mock = new Mock<SolidEdgePart.WeldmentDocument>();
+        var mockProps = new Mock<PropertySets>();
+        var mockSummary = new Mock<SummaryInfo>();
+        var mockVars = new Mock<Variables>();
+
         mock.SetupGet(d => d.CreatedVersion).Returns("7.0.0.0");
         mock.SetupGet(d => d.LastSavedVersion).Returns("8.0.0.0");
+        mock.SetupGet(d => d.Properties).Returns(mockProps.Object);
+        mock.SetupGet(d => d.SummaryInfo).Returns(mockSummary.Object);
+        mock.SetupGet(d => d.Variables).Returns(mockVars.Object);
 
         Assert.AreEqual(new Version("7.0.0.0"), mock.Object.GetCreatedVersion());
         Assert.AreEqual(new Version("8.0.0.0"), mock.Object.GetLastSavedVersion());
+        Assert.AreSame(mockProps.Object, mock.Object.GetProperties());
+        Assert.AreSame(mockSummary.Object, mock.Object.GetSummaryInfo());
+        Assert.AreSame(mockVars.Object, mock.Object.GetVariables());
     }
 
     [TestMethod]

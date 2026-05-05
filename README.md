@@ -2,7 +2,6 @@
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=build)
 ![Test Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=tests)
-[![codecov](https://codecov.io/gh/SolidEdgeCommunity/SolidEdge.Community/branch/master/graph/badge.svg?token=YOUR_TOKEN_HERE)](https://codecov.io/gh/SolidEdgeCommunity/SolidEdge.Community)
 
 A community-driven toolkit for automating Siemens Solid Edge using modern .NET.
  This project provides a set of high-level abstractions, extension methods, and utilities to simplify COM interop and enhance developer productivity.
@@ -36,6 +35,7 @@ The project maintains a rigorous testing standard:
 - **Unit Tests:** A comprehensive test suite using **MSTest** and **Moq**.
 - **Mocking:** COM dependencies are fully isolated via mocking, allowing tests to run without a local Solid Edge installation.
 - **Coverage:** Aiming for 80%+ code coverage to ensure long-term maintainability and reliability.
+- **Local Coverage:** Run `./coverage.ps1` to execute tests and generate a local coverage report in the `coverage-report` directory.
 - **Mutation Testing:** Designed to be resilient against mutation testing to verify test quality.
 
 ## Contribution

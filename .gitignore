@@ -219,3 +219,7 @@ pip-log.txt
 .dll
 /.vs
 /src/.vs
+
+# Code Coverage
+/coverage/
+/coverage-report/

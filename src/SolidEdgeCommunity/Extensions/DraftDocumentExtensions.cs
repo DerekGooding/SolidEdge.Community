@@ -15,8 +15,11 @@ public static class DraftDocumentExtensions
     /// <returns></returns>
     public static IEnumerable<object> EnumerateDrawingObjects(this SolidEdgeDraft.DraftDocument document)
     {
-        foreach (SolidEdgeDraft.Section section in document.Sections)
+        var sections = document.Sections;
+
+        for (int i = 1; i <= sections.Count; i++)
         {
+            var section = sections.Item(i);
             foreach (var drawingObject in section.EnumerateDrawingObjects())
             {
                 yield return drawingObject;
@@ -31,8 +34,11 @@ public static class DraftDocumentExtensions
     /// <returns></returns>
     public static IEnumerable<T> EnumerateDrawingObjects<T>(this SolidEdgeDraft.DraftDocument document) where T : class
     {
-        foreach (SolidEdgeDraft.Section section in document.Sections)
+        var sections = document.Sections;
+
+        for (int i = 1; i <= sections.Count; i++)
         {
+            var section = sections.Item(i);
             foreach (var drawingObject in section.EnumerateDrawingObjects<T>())
             {
                 yield return drawingObject;
@@ -48,8 +54,12 @@ public static class DraftDocumentExtensions
     /// <returns></returns>
     public static IEnumerable<object> EnumerateDrawingObjects(this SolidEdgeDraft.DraftDocument document, SolidEdgeDraft.SheetSectionTypeConstants sectionType)
     {
-        foreach (SolidEdgeDraft.Section section in document.Sections)
+        var sections = document.Sections;
+
+        for (int i = 1; i <= sections.Count; i++)
         {
+            var section = sections.Item(i);
+
             if (section.Type == sectionType)
             {
                 foreach (var drawingObject in section.EnumerateDrawingObjects())
@@ -68,8 +78,12 @@ public static class DraftDocumentExtensions
     /// <returns></returns>
     public static IEnumerable<object> EnumerateDrawingObjects<T>(this SolidEdgeDraft.DraftDocument document, SolidEdgeDraft.SheetSectionTypeConstants sectionType) where T : class
     {
-        foreach (SolidEdgeDraft.Section section in document.Sections)
+        var sections = document.Sections;
+
+        for (int i = 1; i <= sections.Count; i++)
         {
+            var section = sections.Item(i);
+
             if (section.Type == sectionType)
             {
                 foreach (var drawingObject in section.EnumerateDrawingObjects<T>())
@@ -109,8 +123,12 @@ public static class DraftDocumentExtensions
     /// <returns></returns>
     public static IEnumerable<SolidEdgeDraft.DrawingView> EnumerateDrawingViews(this SolidEdgeDraft.DraftDocument document, SolidEdgeDraft.SheetSectionTypeConstants sectionType)
     {
-        foreach (SolidEdgeDraft.Section section in document.Sections)
+        var sections = document.Sections;
+
+        for (int i = 1; i <= sections.Count; i++)
         {
+            var section = sections.Item(i);
+
             if (section.Type == sectionType)
             {
                 foreach (SolidEdgeDraft.DrawingView drawingView in section.EnumerateDrawingViews())

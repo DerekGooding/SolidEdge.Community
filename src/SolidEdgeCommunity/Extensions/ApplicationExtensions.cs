@@ -97,10 +97,13 @@ public static class ApplicationExtensions
     public static Environment GetEnvironment(this Application application, string CATID)
     {
         var guid1 = new Guid(CATID);
+        var environments = application.Environments;
 
-        foreach (var environment in application.Environments.OfType<Environment>())
+        for (int i = 1; i <= environments.Count; i++)
         {
+            var environment = environments.Item(i);
             var guid2 = new Guid(environment.CATID);
+
             if (guid1.Equals(guid2))
             {
                 return environment;
