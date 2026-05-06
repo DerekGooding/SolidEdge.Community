@@ -4,8 +4,7 @@
 ![Test Status](https://img.shields.io/github/actions/workflow/status/SolidEdgeCommunity/SolidEdge.Community/ci.yml?branch=master&label=tests)
 [![Coverage](https://SolidEdgeCommunity.github.io/SolidEdge.Community/badge_linecoverage.svg)](https://SolidEdgeCommunity.github.io/SolidEdge.Community/index.html)
 
-A community-driven toolkit for automating Siemens Solid Edge using modern .NET.
- This project provides a set of high-level abstractions, extension methods, and utilities to simplify COM interop and enhance developer productivity.
+This is a forked repository that has updated the library for .NET 10. You'll need to set your project to windows-only.
 
 ## Target Frameworks
 This project targets **.NET 10.0-windows**. When consuming this library, ensure your project file specifies the Windows-specific TFM:
