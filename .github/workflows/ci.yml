@@ -9,6 +9,8 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v6
@@ -25,4 +27,17 @@ jobs:
       run: dotnet build src/SolidEdgeCommunity.sln --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test src/SolidEdgeCommunity.sln --configuration Release --no-build --verbosity normal
+      run: dotnet test src/SolidEdgeCommunity.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+
+    - name: Install ReportGenerator
+      run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+    - name: Generate Coverage Report
+      run: reportgenerator "-reports:coverage\**\coverage.cobertura.xml" "-targetdir:coverage-report" "-reporttypes:Html;Badges"
+
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./coverage-report
